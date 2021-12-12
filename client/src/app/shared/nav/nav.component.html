@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+   
+    <div class="container" >
+        <a class="navbar-brand"  routerLinkActive="active">START YOUR JOURNEY</a>
+        <ul class="navbar-nav me-auto mb-2 mb-md-0"> 
+          <li class="nav-item" >
+            <button id="logout" class="btn btn-dark" routerLink="login">Login</button>
+          </li>
+        </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0"> 
+        <li class="nav-item" >
+          <button id="logout"  class="btn btn-dark" (click)="logout()">Logout</button>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 
+        <li class="nav-item" >
+          <button id="logout" class="btn btn-dark" routerLink="addnewrecipe">Add new recipe</button>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 
+        <li class="nav-item" >
+          <button id="logout" class="btn btn-dark" routerLink="addcategory">Add new category</button>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 
+        <li class="nav-item" >
+          <button id="logout" class="btn btn-dark" routerLink="ingredients">Ingredients</button>
+        </li>
+      </ul>
+    </div>
+</nav>
+<!-- *ngIf="loggedIn" -->

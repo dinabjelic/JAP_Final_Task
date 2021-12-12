@@ -1,0 +1,47 @@
+
+<table class="table table-striped" >
+
+    <thead>
+          <tr>
+              <th>CategoryRecipeID</th>
+              <th>Category recipe name</th>
+              <th>Options</th>
+          </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let dataItem of CategoryRecipesList" >
+            <td>{{dataItem.id}}</td>
+            <td>{{dataItem.name}}</td>
+            <td>
+                <button routerLink="/categories/{{dataItem.id}}"
+                type="button" class="btn btn-light mr-1" Button>See details</button>
+            </td>
+            <td>
+                <button routerLink="/updatecategory/{{dataItem.id}}"
+                type="button" class="btn btn-light mr-1" Button>Update category</button>
+            </td>
+            <td>
+                <button (click)="deleteCategory(dataItem.id)"
+                type="button" class="btn btn-light mr-1" Button>Delete category</button>
+            </td>
+        </tr>
+
+    </tbody>
+
+</table>
+
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination
+    [boudaryLinks]="true"
+    [totalItems]="pagination.totalItems"
+    [itemsPerPage]="pagination.itemsPerPage"
+    [(ngModel)]="pagination.currentPage"
+    (pageChanged)= "pageChanged($event)" 
+    previousText="&lsaquo;"
+    nextText="&rsaquo;"
+    firstText="&laquo;"
+    lastText="&raquo;">
+    </pagination>
+</div>
+

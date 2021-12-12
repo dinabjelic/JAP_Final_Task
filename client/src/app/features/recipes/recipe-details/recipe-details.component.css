@@ -1,0 +1,43 @@
+table{
+    width: 80%;
+    margin-left: 10%;
+    cursor: pointer;
+}
+table tr td{
+    text-align: center;
+}
+table thead tr{
+    text-align: center;
+}
+.row{
+    width: 90%;
+}
+.container{
+ border: 1px solid red;
+ font-weight: bold;
+}
+.container_{
+    margin-top: 10%;
+}
+
+h5{
+    margin-top: 2%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+p{
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-left: 10%;
+    margin-top: 2%;
+}
+.navbar{
+    width: 20%;
+    margin-left: 70%;
+    float: left;
+    margin-top: -5%;
+}
+nav input{
+    font-size: 13px;
+
+}

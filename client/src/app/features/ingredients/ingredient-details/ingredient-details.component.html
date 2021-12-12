@@ -1,0 +1,32 @@
+<div>
+    <table class="table table-striped table-hover" >
+        
+        <thead>
+            <tr>
+                <th>Ingredient name</th>
+                <th>Ingredient price</th>
+                <th>Quantity</th>
+                <th>Measure</th>
+          </tr>
+        </thead>
+        <tbody>
+            
+            <tr *ngFor="let dataItem of Ingredients" >
+                <td>{{dataItem.name}}</td>
+                <td>{{dataItem.price}} $</td>
+                <td>{{dataItem.quantity}}</td>
+                <td>{{dataItem.measure}}</td>
+                <td>
+                    <button routerLink="/ingredients/{{dataItem.id}}"
+                    type="button" class="btn btn-light mr-1" Button >Update ingredient</button>
+                </td>
+                <td>
+                    <button (click)="deleteIngredient(dataItem.id)"
+                    type="button" class="btn btn-light mr-1" Button>Delete recipe</button>
+                </td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <button type="submit" class="btn btn-primary" routerLink="addingredient" style="cursor: pointer; margin-left: 3%;">Add ingredient</button>
+</div>

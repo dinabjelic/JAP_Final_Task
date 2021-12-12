@@ -1,0 +1,57 @@
+<div *ngIf="CategoryRecipesList">
+<div class="container_">
+    <div class="row_">
+        <div class="col align-self-center">
+            
+            <p> Recipe for: {{CategoryRecipesList.name}}  {{CategoryRecipesList.categoryName}}
+                <br>
+                Total recipe cost: {{CategoryRecipesList.ingredientRecipes[CategoryRecipesList.ingredientRecipes.length-1].totalCost}} $</p>
+
+         </div>
+    </div>
+</div>
+
+
+<!-- <nav class="navbar">
+    <input class="form-control" type="text" name="ingredientName" [(ngModel)]="ingredientName" 
+    (ngModelChange)="Search()" placeholder="Enter ingredient name to search">
+</nav>  -->
+
+
+<table class="table table-striped table-hover" >
+
+    <thead>
+          <tr>
+              <th>Ingredient Name</th>
+              <th>Purchase price</th>
+              <th>Quantity</th>
+              <th>Measure</th>
+              <th>Ingredient price</th>
+          </tr>
+    </thead>
+    <tbody>
+       
+        <tr *ngFor="let dataItem of CategoryRecipesList.ingredientRecipes">
+            <td>{{dataItem.ingredients.name}}</td>
+            <td>{{dataItem.ingredients.price | number}}</td>
+            <td>{{dataItem.ingredients.quantity}}</td>
+            <td>{{dataItem.ingredients.measure}}</td>
+            <td>{{dataItem.ingredientPrice}}</td>
+            <!-- <td>
+                <button routerLink="categories/{{dataItem.ingredients.id}}/updaterecipedetails"
+                type="button" class="btn btn-light mr-1" Button>Update details</button>
+            </td> -->
+        </tr>
+    </tbody>
+</table>
+
+
+<div class="container">
+    DESCRIPTION 
+    <div class="row">
+        <div class="col align-self-center" >
+            <h5>{{CategoryRecipesList.description}}</h5>
+         </div>
+    </div>
+</div>
+</div>

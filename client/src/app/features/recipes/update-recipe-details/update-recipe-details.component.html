@@ -1,0 +1,13 @@
+<form [formGroup]="updateRecipeDetailsForm" (submit)="updateRecipeDetails()" style="margin-top: 200px;">
+  <p>
+    <input placeholder="quantity" formControlName="quantity">
+  </p>
+  <p>
+    <input placeholder="kg g l ml" formControlName="measure">
+  </p>
+  <p>
+    <input placeholder="description" formControlName="description">
+  </p>
+
+  <button type="submit" class="btn btn-primary" style="cursor: pointer; margin-left: 3%;">Update ingredient</button>
+</form>

@@ -1,0 +1,64 @@
+<mat-card>
+  <form [formGroup]="addRecipeForm" (submit)="createRecipe()">
+    <div class="form-group">
+      <label> Choose category to add recipe</label>
+      <select class="form-conrol custom-dropdown" formControlName="categoryId" >
+        <option>Categories</option>
+        <option *ngFor="let dl of CategoryRecipesList" [value]="dl.categoryId">{{dl.categoryName}}</option>
+      </select>
+    </div>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Recipe name</mat-label>
+        <input matInput placeholder="Recipe name" formControlName="name">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline" >
+        <mat-label>UserId</mat-label>
+        <input matInput placeholder="You have to write down UserID=1" formControlName="userId">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Price</mat-label>
+        <input matInput placeholder="Price" formControlName="price">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline" id="decsription">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Description" formControlName="description">
+        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
+      </mat-form-field>
+    </p>
+    <form [formGroup]="ingredientForm " (ngSubmit)="onSubmit()" id="minForm" > 
+              <div class="dropdown">
+                  <div class="form-group">
+                    <label> Choose ingredient to add recipe</label>
+                    <select class="form-conrol custom-dropdown" formControlName="id" >
+                      <option>Ingredients</option>
+                      <option *ngFor="let dl of IngredientsForm" [value]="dl.id">{{dl.name}}</option>
+                    </select>
+                  </div>
+
+                  <div class="input-group mb-3"style="width: 80%; margin-left: 5%;">
+              <span style="display: block;" class="input-group mb-3"> Quantity</span>
+              <input class="form-control" formControlName="quantity">
+            </div>
+            <div class="input-group mb-3" style="width: 80%; margin-left: 5%;">
+              <span  style="display: block;" class="input-group mb-3">Measure</span>
+              <input class="form-control" formControlName="measure" placeholder="kg, g, ml, l">
+            </div>
+
+              <button type="submit" class="btn btn-primary" style="cursor: pointer; margin-left: 3%;">Add ingredient</button>
+            </div>
+    </form>
+    <p>
+      <button type="submit" class="btn btn-secondary" style="margin-top: 10%; margin-left:-10%;">Create recipe</button>
+    </p>
+  </form>
+</mat-card>
