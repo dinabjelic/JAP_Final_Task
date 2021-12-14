@@ -9,7 +9,7 @@ namespace RecipesApp.Core.Dtos
 {
     public class IngredientSearch
     {
-        public string IngredientName { get; set; }
+        public string Name { get; set; }
         public int? Quantity { get; set; }
         public UnitMeasureType? Measure { get; set; }
     }

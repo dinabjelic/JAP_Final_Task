@@ -13,13 +13,14 @@ import { IngredientDetailsComponent } from './features/ingredients/ingredient-de
 import { AddIngredientComponent } from './features/ingredients/add-ingredient/add-ingredient.component';
 import { UpdateIngredientComponent } from './features/ingredients/update-ingredient/update-ingredient.component';
 import { UpdateRecipeDetailsComponent } from './features/recipes/update-recipe-details/update-recipe-details.component';
+import { AuthGuardGuard } from './core/guards/auth-guard';
 
 const routes: Routes = [
 
-{path:'categories',component:RecipesComponent},
+{path:'categories',component:RecipesComponent,},
 {path:'categories/:id', component:RecipesForCategoryComponent},
 {path:'categories/:id/:recipeid', component:RecipeDetailsComponent},
-{path:'addnewrecipe', component:AddrecipeComponent},
+{path:'addnewrecipe', component:AddrecipeComponent, canActivate:[AuthGuardGuard]},
 {path:'login', component:LoginformComponent},
 {path:'addcategory', component:AddCategoryComponent},
 {path:'updatecategory/:id',component:UpdateCategoryComponent},
@@ -27,7 +28,8 @@ const routes: Routes = [
 {path:'ingredients', component:IngredientDetailsComponent},
 {path:'ingredients/addingredient',component:AddIngredientComponent}, 
 {path:'ingredients/:id', component:UpdateIngredientComponent}, 
-{path:'categories/:ingredientsId/updaterecipedetails', component:UpdateRecipeDetailsComponent}
+{path:'categories/:ingredientsId/updaterecipedetails', component:UpdateRecipeDetailsComponent},
+{path:'auth',component:LoginformComponent}
 
 ];
 

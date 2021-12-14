@@ -1,4 +1,5 @@
 ﻿using DatingApp.API.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipesApp.Core.Extensions;
 using RecipesApp.Core.Helpers;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace RecipesApp.Controllers
 {
+    [Authorize]
     public class CategoriesController : BaseApiController
     {
         private readonly ICategoryService _categories;
@@ -16,6 +18,7 @@ namespace RecipesApp.Controllers
             _categories = recipesCategories;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetCategories([FromQuery] PaginationParams paginationParams)
         {

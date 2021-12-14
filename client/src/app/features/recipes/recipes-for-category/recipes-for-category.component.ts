@@ -22,37 +22,26 @@ export class RecipesForCategoryComponent implements OnInit {
 
   ngOnInit(): void {
   
-    this.loadRecipesCategory();
+    this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
   }
 
-
-  loadRecipesCategory(){
-    this.service.getAllCategoryRecipes(this.route.snapshot.params.id,this.searchTerm).subscribe(
-      response=>{
-        this.CategoryRecipesList= response; 
-      });
+    loadRecipeCategory(id:number,searchTerm:string){
+      this.service.getAllCategoryRecipes(this.route.snapshot.params.id,this.searchTerm).subscribe(
+        response=>{
+          this.CategoryRecipesList= response; 
+        });
     }
-
     
     deleteRecipe(item){
       this.service.deleteRecipe(item).subscribe(data=>{
-        this.loadRecipesCategory();
+        this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
       })
       location.reload();
     }
 
-   
     Search()
     {
-      if(this.searchTerm.length < 2)
-      {
-        this.loadRecipesCategory();
-      }
-      else
-      {
-        this.CategoryRecipesList= this.CategoryRecipesList.filter(res=>{
-           return res.name.toLocaleLowerCase().match(this.searchTerm.toLocaleLowerCase());})
-      }
+        this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
     }
 }
     

@@ -145,17 +145,6 @@ namespace RecipesApp.Services
         public async Task DeleteRecipeAsync(int recipeId)
         {
             var recipe = _context.Recipes.Find(recipeId);
-
-            foreach (var x in _context.RecipesCategoryRecipes.Where(a => a.RecipesId == recipeId))
-            {
-                _context.RecipesCategoryRecipes.Remove(x);
-            }
-
-            foreach(var x in _context.IngredientsRecepies.Where(a=>a.RecipesId ==recipeId))
-            {
-                _context.IngredientsRecepies.Remove(x);
-            }
-
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
         }

@@ -43,9 +43,9 @@ namespace RecipesApp.Controllers
             }
         }
         [HttpGet("all-ingredients")]
-        public async Task<IActionResult> GetAllIngredients([FromQuery] PaginationParams paginationParams, [FromQuery] IngredientSearch ingredientSearch)
+        public async Task<IActionResult> GetAllIngredients([FromQuery] PaginationParams paginationParams, [FromQuery] IngredientSearch ingredientSearch,int? number)
         {
-            var ingredients = await _ingredientService.GetAllIngredientsAsync(paginationParams, ingredientSearch);
+            var ingredients = await _ingredientService.GetAllIngredientsAsync(paginationParams, ingredientSearch,number);
 
             Response.AddPaginationHeader(ingredients.CurrentPage, ingredients.PageSize, ingredients.TotalCount, ingredients.TotalPages);
 

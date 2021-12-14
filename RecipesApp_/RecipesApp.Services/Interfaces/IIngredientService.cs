@@ -42,8 +42,9 @@ namespace RecipesApp.Interfaces
         /// </summary>
         /// <param name="paginationParams"></param>
         /// <param name="ingredientSearch"></param>
+        /// <param name="number"></param>
         /// <returns></returns>
-        Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(PaginationParams paginationParams,IngredientSearch ingredientSearch);
+        Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(PaginationParams paginationParams,IngredientSearch ingredientSearch,int? number);
         /// <summary>
         /// Editing existing ingredient
         /// </summary>

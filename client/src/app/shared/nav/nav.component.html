@@ -4,12 +4,12 @@
         <a class="navbar-brand"  routerLinkActive="active">START YOUR JOURNEY</a>
         <ul class="navbar-nav me-auto mb-2 mb-md-0"> 
           <li class="nav-item" >
-            <button id="logout" class="btn btn-dark" routerLink="login">Login</button>
+            <button *ngIf="!service.isAuthenticated" id="logout" class="btn btn-dark" routerLink="login">Login</button>
           </li>
         </ul>
       <ul class="navbar-nav me-auto mb-2 mb-md-0"> 
         <li class="nav-item" >
-          <button id="logout"  class="btn btn-dark" (click)="logout()">Logout</button>
+          <button id="logout" *ngIf="service.isAuthenticated" class="btn btn-dark" (click)="logout()">Logout</button>
         </li>
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 

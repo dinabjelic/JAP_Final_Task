@@ -1,14 +1,11 @@
 import { UnitMeasure } from "../enums/UnitMeasure";
 
-export class GetIngredientsResponse{
-    
+export class IngredientSearch{
+
     constructor(
 
-        public id:string,
         public name:string, 
-        public price:number, 
-        public quantity:number, 
+        public quantity:number,
         public measure: UnitMeasure
-
     ){}
 }

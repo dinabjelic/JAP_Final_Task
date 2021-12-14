@@ -15,6 +15,7 @@ import { UpdateRecipeRequest } from './requests/UpdateRecipeRequest';
 import { GetIngredientsResponse } from './responses/GetIngredientsResponse';
 import { UpdateIngredientRequest } from './requests/UpdateIngredientRequest';
 import { UpdateRecipeDetailsRequest } from './requests/UpdateRecipeDetailsRequest';
+import { IngredientSearch } from './dtos/IngredientSearch';
 
 
 @Injectable({
@@ -22,12 +23,12 @@ import { UpdateRecipeDetailsRequest } from './requests/UpdateRecipeDetailsReques
 })
 export class SharedService {
 
-  //here we store the user, koji tip store-amo i koliko previous values da uzemmo.. Samo je jedan logiran korisnik
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
   public isAuthenticated = false;
   readonly ApiUrl = "https://localhost:5001/api/";
   paginatedResult: PaginatedResult<RecipesCategory[]> = new PaginatedResult<RecipesCategory[]>();
+  paginatedResult2: PaginatedResult<GetIngredientsResponse[]>= new PaginatedResult<GetIngredientsResponse[]>();
 
 
   constructor(private http: HttpClient, public router: Router) {
@@ -52,6 +53,33 @@ export class SharedService {
         return this.paginatedResult;
       })
     )
+  }
+
+  gettAllIngredients(number?:number,page?: number, itemsPerPage?: number,searchTerm?:IngredientSearch,orderBy?:string){
+    let params = new HttpParams()
+    .set("name",searchTerm?.name??'')
+    .set("measure", searchTerm?.measure??'')
+    .set("quantity", searchTerm?.quantity??'')
+    .set("number",number??'')
+    .set("orderBy",orderBy??'');
+
+    if (page !== null && itemsPerPage !== null) {
+      params = params.append('pageNumber', page.toString());
+      params = params.append('pageSize', itemsPerPage.toString());
+    }
+
+    return this.http.get<GetIngredientsResponse[]>(this.ApiUrl + "Ingredients/all-ingredients",{
+      observe: 'response',
+      params:params
+    }).pipe(
+      map(response => {
+        this.paginatedResult2.result = response.body;
+        if (response.headers.get('Pagination') !== null) {
+          this.paginatedResult2.pagination = JSON.parse(response.headers.get('Pagination'));
+        }
+        return this.paginatedResult2;
+      })
+    );
   }
 
   getCurrentCategoryData(categoryId:number)
@@ -116,10 +144,7 @@ export class SharedService {
     return this.http.get<Ingredients[]>(this.ApiUrl + "Ingredients");
   }
 
-  gettAllIngredients(){
-    return this.http.get<GetIngredientsResponse[]>(this.ApiUrl + "Ingredients/all-ingredients");
-  }
-
+ 
   addIngredient(model:any)
   {
     return this.http.post(this.ApiUrl+"Ingredients",model);
@@ -148,28 +173,4 @@ export class SharedService {
     this.router.navigate(['/auth']);
   }
 
-
-
-  //   login(model:any){
-  //     return this.http.post(this.ApiUrl + "Authentication/login",model).pipe(
-  //       map((response:User)=>{
-  //         const user = response; 
-  //         if(user){
-  //           localStorage.setItem('user', JSON.stringify(user));
-  //           this.currentUserSource.next(user); 
-  //         }
-  //       })
-  //     )
-  //   }
-
-  //   setCurrentUser(user:User)
-  //   {
-  //     this.currentUserSource.next(user);  
-  //   }
-
-  //   logout(){
-  //     localStorage.removeItem('token');
-  //     localStorage.removeItem('user'); 
-  //     this.currentUserSource.next(null); 
-  // } 
 }

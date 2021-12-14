@@ -74,12 +74,7 @@ namespace RecipesApp.Services
 
         public async Task DeleteCategoryAsync(int categorId)
         {
-            RecipeCategory recipesCategory = _context.RecipesCategories.Find(categorId);
-
-            foreach(var x in _context.RecipesCategoryRecipes.Where(a=>a.RecipesCategoryId == categorId))
-            {
-                _context.RecipesCategoryRecipes.Remove(x);
-            }
+            var recipesCategory = _context.RecipesCategories.Find(categorId);
 
             _context.RecipesCategories.Remove(recipesCategory);
             await _context.SaveChangesAsync();

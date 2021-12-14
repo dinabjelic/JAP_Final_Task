@@ -72,7 +72,7 @@ namespace RecipesApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(PaginationParams paginationParams, IngredientSearch ingredientSearch)
+        public async Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(PaginationParams paginationParams, IngredientSearch ingredientSearch,int? number)
         {
             var ingredients = _context.Ingredients.AsQueryable();
 
@@ -83,9 +83,9 @@ namespace RecipesApp.Services
                 _ => ingredients.OrderBy(u => u.Price)
             };
 
-            if (!string.IsNullOrEmpty(ingredientSearch.IngredientName))
+            if (!string.IsNullOrEmpty(ingredientSearch.Name))
             {
-                ingredients = ingredients.Where(x => x.Name.Contains(ingredientSearch.IngredientName));
+                ingredients = ingredients.Where(x => x.Name.ToLower().Contains(ingredientSearch.Name));
             }
             if (ingredientSearch.Quantity.HasValue)
             {
@@ -97,7 +97,7 @@ namespace RecipesApp.Services
             }
 
             return await PagedList<GetIngredientsResponse>.CreateAsync(ingredients.ProjectTo<GetIngredientsResponse>
-                (_mapper.ConfigurationProvider).AsNoTracking(),paginationParams.PageNumber, paginationParams.PageSize);
+                (_mapper.ConfigurationProvider).AsNoTracking(),paginationParams.PageNumber, paginationParams.PageSize=(int)number);
         }
 
         public async Task UpdateIngredientAsync(UpdateIngredientRequest updateIngredientRequest)
@@ -111,11 +111,6 @@ namespace RecipesApp.Services
         public async Task DeleteIngredientAsync(int ingredientId)
         {
             var ingredient = _context.Ingredients.Find(ingredientId);
-
-            foreach (var x in _context.IngredientsRecepies.Where(a => a.IngredientsId == ingredientId))
-            {
-                _context.IngredientsRecepies.Remove(x);
-            }
 
             _context.Ingredients.Remove(ingredient);
             await _context.SaveChangesAsync();

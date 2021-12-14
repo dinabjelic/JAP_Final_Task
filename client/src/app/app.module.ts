@@ -33,6 +33,8 @@ import { IngredientDetailsComponent } from './features/ingredients/ingredient-de
 import { AddIngredientComponent } from './features/ingredients/add-ingredient/add-ingredient.component';
 import { UpdateIngredientComponent } from './features/ingredients/update-ingredient/update-ingredient.component';
 import { UpdateRecipeDetailsComponent } from './features/recipes/update-recipe-details/update-recipe-details.component';
+import {ButtonsModule} from 'ngx-bootstrap/buttons';
+
 
 
 
@@ -73,6 +75,7 @@ import { UpdateRecipeDetailsComponent } from './features/recipes/update-recipe-d
     BrowserAnimationsModule, 
     PaginationModule.forRoot(),
     NgxPaginationModule,
+    ButtonsModule.forRoot()
     // MatSnackBar
     
   ],

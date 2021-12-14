@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from 'app/core/models/User';
-import { Observable } from 'rxjs';
 import { SharedService } from '../../core/shared.service';
 
 @Component({
@@ -13,13 +11,13 @@ export class NavComponent implements OnInit {
 
   loggedIn: boolean;
   
-  constructor(private service:SharedService, private route:Router) { }
+  constructor(public service:SharedService, private route:Router) { }
 
   ngOnInit(): void {
   }
   logout(){
     this.service.logout();
-    this.route.navigate(['/']);
-    this.loggedIn=false; 
+    this.route.navigate(['auth']);
+    this.service.isAuthenticated=false;
   }
 }
