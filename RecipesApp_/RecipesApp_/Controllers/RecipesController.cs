@@ -16,6 +16,7 @@ namespace RecipesApp.Controllers
 
         private readonly IRecipeService _categoryRecipes;
         private readonly IGetRecipeService _getRecipeService;
+        
 
         public RecipesController(IRecipeService categoryRecipes, IGetRecipeService getRecipeService)
         {

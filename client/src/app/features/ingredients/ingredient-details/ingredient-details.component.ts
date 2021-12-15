@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { IngredientSearch } from 'app/core/dtos/IngredientSearch';
-import { UnitMeasure } from 'app/core/enums/UnitMeasure';
 import { PaginatedResult, Pagination } from 'app/core/helpers/Pagination';
 import { GetIngredientsResponse } from 'app/core/responses/GetIngredientsResponse';
 import { SharedService } from 'app/core/shared.service';
-import { PaginationComponent } from 'ngx-bootstrap/pagination';
-import { reduce } from 'rxjs/operators';
+import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
+import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-ingredient-details',
@@ -23,9 +24,10 @@ export class IngredientDetailsComponent implements OnInit {
   number=5;
 
 
-  constructor(public service: SharedService) {
+  constructor(public service: SharedService,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
+    private toastr:ToastrService,public route:Router) {
   }
-  
+
   ngOnInit(): void {
 
       this.loadIngredients(this.number,this.pageNumber, this.pageSize,this.searchTerm,this.orderBy);
@@ -47,10 +49,26 @@ export class IngredientDetailsComponent implements OnInit {
   }
 
   deleteIngredient(item) {
-    this.service.deleteIngredient(item).subscribe(data => {
-      this.loadIngredients(this.number,this.pageNumber, this.pageSize,this.searchTerm,this.orderBy);
-    })
-    location.reload();
+
+    let options ={
+      title: 'Sure you want to delete this ingredient?',
+      confirmLabel: 'Yes',
+      declineLabel: 'Cancel'
+    }
+    this.ngxBootstrapConfirmService.confirm(options).then((res: boolean) => {
+      if (res) {
+        this.service.deleteIngredient(item).subscribe(data => {
+          this.loadIngredients(this.number,this.pageNumber, this.pageSize,this.searchTerm,this.orderBy);
+        })
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+      } 
+      this.toastr.success("Ingredient succesfully deleted");
+    }), err => {
+      this.toastr.error(err.error);
+      console.log("Unable to delete ingredient");
+    }
   }
   
   Search() {

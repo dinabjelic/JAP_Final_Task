@@ -73,34 +73,6 @@ namespace RecipesApp.Services
             await _context.SaveChangesAsync();
         }
 
-        //public async Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(PaginationParams paginationParams, IngredientSearch ingredientSearch,int? number)
-        //{
-        //    var ingredients = _context.Ingredients.AsQueryable();
-
-        //    ingredients = paginationParams.OrderBy switch
-        //    {
-        //        "name" => ingredients.OrderByDescending(u => u.Name),
-        //        "quantity"=> ingredients.OrderByDescending(u=>u.Quantity),
-        //        _ => ingredients.OrderBy(u => u.Price)
-        //    };
-
-        //    if (!string.IsNullOrEmpty(ingredientSearch.Name))
-        //    {
-        //        ingredients = ingredients.Where(x => x.Name.ToLower().Contains(ingredientSearch.Name.ToLower()));
-        //    }
-        //    if (ingredientSearch.Quantity.HasValue)
-        //    {
-        //        ingredients = ingredients.Where(x => x.Quantity == ingredientSearch.Quantity);
-        //    }
-        //    if (ingredientSearch.Measure.HasValue)
-        //    {
-        //        ingredients = ingredients.Where(x => x.Measure == ingredientSearch.Measure);
-        //    }
-
-        //    return await PagedList<GetIngredientsResponse>.CreateAsync(ingredients.ProjectTo<GetIngredientsResponse>
-        //        (_mapper.ConfigurationProvider).AsNoTracking(),paginationParams.PageNumber, paginationParams.PageSize=(int)number);
-        //}
-
         public async Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(IngredientSearch ingredientSearch)
         {
             var ingredients = _context.Ingredients.AsQueryable();

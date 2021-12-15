@@ -1,6 +1,8 @@
 import { SelectorMatcher } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
+import { ToastrService } from 'ngx-toastr';
 import { RecipesCategories } from '../../../core/models/RecipesCategories';
 import { SharedService } from '../../../core/shared.service';
 
@@ -17,7 +19,8 @@ export class RecipesForCategoryComponent implements OnInit {
   searchTerm:string="";
   recipeCategoryId:number;
  
-  constructor(private service:SharedService, private route:ActivatedRoute) { }
+  constructor(private service:SharedService, private route:ActivatedRoute,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
+    private toastr:ToastrService) { }
 
 
   ngOnInit(): void {
@@ -33,10 +36,25 @@ export class RecipesForCategoryComponent implements OnInit {
     }
     
     deleteRecipe(item){
-      this.service.deleteRecipe(item).subscribe(data=>{
-        this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
-      })
-      location.reload();
+      let options ={
+        title: 'Sure you want to delete this ingredient?',
+        confirmLabel: 'Yes',
+        declineLabel: 'Cancel'
+      }
+      this.ngxBootstrapConfirmService.confirm(options).then((res: boolean) => {
+        if (res) {
+          this.service.deleteRecipe(item).subscribe(data=>{
+            this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
+          })
+          setTimeout(() => {
+            location.reload();
+          }, 1000);
+        } 
+        this.toastr.success("Recipe succesfully deleted");
+      }), err => {
+        this.toastr.error(err.error);
+        console.log("Unable to delete recipe");
+      }
     }
 
     Search()

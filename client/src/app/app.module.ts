@@ -81,7 +81,7 @@ import { NgxBootstrapConfirmModule } from 'ngx-bootstrap-confirm';
     NgxPaginationModule,
     ButtonsModule.forRoot(),
     ToastrModule.forRoot({
-      positionClass: 'toastr-top-right'
+      positionClass: 'toastr-top-left'
     }),
     ModalModule.forRoot(),
     NgxBootstrapConfirmModule

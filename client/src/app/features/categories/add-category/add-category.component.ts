@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SharedService } from 'app/core/shared.service';
 import { ToastrService } from 'ngx-toastr';
 
@@ -12,7 +13,7 @@ export class AddCategoryComponent implements OnInit {
 
   addCategoryForm:FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder,private service: SharedService,private toastr:ToastrService) { }
+  constructor(private formBuilder: FormBuilder,private service: SharedService,private toastr:ToastrService,public route:Router) { }
 
   ngOnInit(): void {
     this.addCategoryForm = this.formBuilder.group({
@@ -26,6 +27,9 @@ export class AddCategoryComponent implements OnInit {
       this.toastr.error(err.error);
       console.log("Unable to create category for recipe");
     }
+    setTimeout(() => {
+      this.route.navigate(['/categories']);
+    }, 2000);
     this.addCategoryForm.reset();
     this.toastr.success("Category succesfully added");
   }

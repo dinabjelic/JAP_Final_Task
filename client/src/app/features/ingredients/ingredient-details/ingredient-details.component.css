@@ -1,13 +1,15 @@
-table{
-    margin-top: 5%;
-    width: 80%;
-    margin-left: 10%;
-    cursor: pointer;
-    
+table {
+  margin-top: 5%;
+  width: 80%;
+  margin-left: 10%;
+  cursor: pointer;
+
 }
-table tr td{
-    text-align: center;
+
+table tr td {
+  text-align: center;
 }
-table thead tr{
-    text-align: center;
+
+table thead tr {
+  text-align: center;
 }
