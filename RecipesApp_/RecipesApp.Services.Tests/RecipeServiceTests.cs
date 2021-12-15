@@ -70,7 +70,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            await _recipeService.AddRecipe(recipeOne);
+            await _recipeService.AddRecipeAsync(recipeOne);
 
             var recipeFromDb = _context.Recipes.FirstOrDefault(x => x.Name == recipeOne.Name);
 
@@ -96,7 +96,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipe(recipeTwo));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipeAsync(recipeTwo));
         }
 
         [Test]
@@ -122,7 +122,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipe(recipeThree));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipeAsync(recipeThree));
         }
 
 
@@ -158,7 +158,7 @@ namespace RecipesApp.Services.Tests
 
             try
             {
-                await _recipeService.AddRecipe(recipeOne);
+                await _recipeService.AddRecipeAsync(recipeOne);
             }
             catch (Exception)
             {
@@ -204,7 +204,7 @@ namespace RecipesApp.Services.Tests
             };
             try
             {
-                await _recipeService.AddRecipe(recipeTwo);
+                await _recipeService.AddRecipeAsync(recipeTwo);
             }
             catch (Exception)
             {
@@ -270,7 +270,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipe(recipeTwo));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipeAsync(recipeTwo));
 
         }
 
@@ -289,7 +289,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipe(recipeTwo));
+            Assert.ThrowsAsync<ArgumentException>(async () => await _recipeService.AddRecipeAsync(recipeTwo));
         }
     }
 }

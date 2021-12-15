@@ -9,24 +9,6 @@
 
     <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.measure" 
     (input)="Search()" placeholder="Enter measure name to search">
-
-    <div class="btn-group float-right">
-        <button
-        type="button"
-        class="btn btn-primary"
-        (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'price')"
-        btnRadio="price">Price</button>
-         <button
-         type="button"
-         class="btn btn-primary"
-         (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'name')"
-         btnRadio="name">Name</button>
-         <button
-         type="button"
-         class="btn btn-primary"
-         (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'quantity')"
-         btnRadio="name">Quantity</button>
-    </div>
 </nav>
 
     
@@ -45,9 +27,9 @@
         
         <thead>
             <tr>
-                <th>Ingredient name</th>
-                <th>Ingredient price</th>
-                <th>Quantity</th>
+                <th><i (click)="loadIngredients(this.number,this.pageNumber,this.pageSize,this.searchTerm,'name')" class="fa fa-sort"></i>Name</th>
+                <th><i (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'price')" class="fa fa-sort"></i>Ingredient price</th>
+                <th><i (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'quantity')" class="fa fa-sort"></i>Quantity</th>
                 <th>Measure</th>
           </tr>
         </thead>
@@ -59,7 +41,7 @@
                 <td>{{dataItem.quantity}}</td>
                 <td>{{dataItem.measure}}</td>
                 <td>
-                    <button routerLink="/ingredients/{{dataItem.id}}"
+                    <button *ngIf="service.isAuthenticated" routerLink="/ingredients/{{dataItem.id}}"
                     type="button" class="btn btn-light mr-1" Button >Update ingredient</button>
                 </td>
                 <td>
@@ -70,7 +52,7 @@
             
         </tbody>
     </table>
-    <button type="submit" class="btn btn-primary" routerLink="addingredient" style="cursor: pointer; margin-left: 3%;">Add ingredient</button>
+    <button type="submit" *ngIf="service.isAuthenticated" class="btn btn-primary" routerLink="addingredient" style="cursor: pointer; margin-left: 3%;">Add ingredient</button>
 
 
 <div class="d-flex justify-content-center" *ngIf="pagination">
@@ -84,9 +66,5 @@
     nextText="&rsaquo;"
     firstText="&laquo;"
     lastText="&raquo;">
-    <!-- <app-page-size>
-        [itemsPerPage]="number"
-        (pageSizeEmmiter)="onPageSizeChange($event)"
-    </app-page-size> -->
     </pagination>
 </div>

@@ -14,17 +14,22 @@
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 
         <li class="nav-item" >
-          <button id="logout" class="btn btn-dark" routerLink="addnewrecipe">Add new recipe</button>
+          <button id="logout" *ngIf="service.isAuthenticated" class="btn btn-dark" routerLink="addnewrecipe">Add new recipe</button>
         </li>
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 
         <li class="nav-item" >
-          <button id="logout" class="btn btn-dark" routerLink="addcategory">Add new category</button>
+          <button id="logout" *ngIf="service.isAuthenticated" class="btn btn-dark" routerLink="addcategory">Add new category</button>
         </li>
       </ul>
       <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 
         <li class="nav-item" >
-          <button id="logout" class="btn btn-dark" routerLink="ingredients">Ingredients</button>
+          <button id="logout" *ngIf="service.isAuthenticated" class="btn btn-dark" routerLink="ingredients">Ingredients</button>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-auto mb-2 mb-md-0"  > 
+        <li class="nav-item" >
+          <button id="logout"  class="btn btn-dark" routerLink="categories">Categories</button>
         </li>
       </ul>
     </div>

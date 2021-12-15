@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { CategoryRecipesComponent } from './features/categories/category-details/category-recipes.component';
 import { SharedService } from './core/shared.service';
 
-import{HttpClientModule} from '@angular/common/http';
+import{HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesComponent } from './features/categories/category-table/recipes.component';
 import { RecipesForCategoryComponent } from './features/recipes/recipes-for-category/recipes-for-category.component';
@@ -34,7 +34,11 @@ import { AddIngredientComponent } from './features/ingredients/add-ingredient/ad
 import { UpdateIngredientComponent } from './features/ingredients/update-ingredient/update-ingredient.component';
 import { UpdateRecipeDetailsComponent } from './features/recipes/update-recipe-details/update-recipe-details.component';
 import {ButtonsModule} from 'ngx-bootstrap/buttons';
-
+import { AuthGuardGuard } from './core/guards/auth-guard';
+import { TokenInterceptorInterceptor } from './core/interceptor/token-interceptor';
+import {ToastrModule} from 'ngx-toastr';
+import {ModalModule} from 'ngx-bootstrap/modal';
+import { NgxBootstrapConfirmModule } from 'ngx-bootstrap-confirm';
 
 
 
@@ -59,7 +63,7 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
     IngredientDetailsComponent,
     AddIngredientComponent,
     UpdateIngredientComponent,
-    UpdateRecipeDetailsComponent
+    UpdateRecipeDetailsComponent, 
   ],
   imports: [
     BrowserModule,
@@ -75,11 +79,22 @@ import {ButtonsModule} from 'ngx-bootstrap/buttons';
     BrowserAnimationsModule, 
     PaginationModule.forRoot(),
     NgxPaginationModule,
-    ButtonsModule.forRoot()
-    // MatSnackBar
+    ButtonsModule.forRoot(),
+    ToastrModule.forRoot({
+      positionClass: 'toastr-top-right'
+    }),
+    ModalModule.forRoot(),
+    NgxBootstrapConfirmModule
     
   ],
-  providers: [SharedService],
+  providers: [
+    SharedService,
+    AuthGuardGuard,{
+      provide:HTTP_INTERCEPTORS,
+      useClass:TokenInterceptorInterceptor, 
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent],
   
   

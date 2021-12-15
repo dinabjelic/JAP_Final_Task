@@ -1,5 +1,7 @@
 ﻿using DatingApp.API.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using RecipesApp.Core.Requests;
 using RecipesApp.Interfaces;
 using RecipesApp.Models;
@@ -8,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace RecipesApp.Controllers
 {
+    [Authorize]
     public class RecipesController : BaseApiController
     {
 
@@ -18,9 +21,9 @@ namespace RecipesApp.Controllers
         {
             _categoryRecipes = categoryRecipes;
             _getRecipeService = getRecipeService;
-
         }
 
+        [AllowAnonymous]
         [HttpGet("{recipeCategoryId}")]
         public async Task<IActionResult> GetRecipesForCategory(int recipeCategoryId,string searchTerm)
         {
@@ -34,9 +37,11 @@ namespace RecipesApp.Controllers
             return Ok(recipesCategory);
         }
 
+        [AllowAnonymous]
         [HttpGet("recipe-details/{recipeId}")]
         public async Task<IActionResult> GetRecipeDetails(int recipeId)
         {
+
             var recipeDetails = await _categoryRecipes.GetRecipesDetailsAsync(recipeId);
 
             if (recipeDetails == null)

@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SharedService } from '../../core/shared.service';
 import { User } from '../../core/models/User';
 import { LoginInsertRequest } from 'app/core/models/LoginInsertRequest';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-loginform',
@@ -21,14 +22,13 @@ export class LoginformComponent implements OnInit {
   data: any;
 
 
-  constructor(private formBuilder: FormBuilder, private service: SharedService, private route: Router) { }
+  constructor(private formBuilder: FormBuilder, private service: SharedService, private route: Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     if (this.service.isAuthenticated) {
       this.route.navigate(["/categories"]);
     }
     this.initForm();
-    // this.currentUser$= this.service.currentUser$; 
   }
 
   initForm() {
@@ -49,13 +49,4 @@ export class LoginformComponent implements OnInit {
       this.ngForm.reset();
     }
   }
-  //  login(){
-  //    this.service.login(this.model).subscribe(response=>{
-
-  //      this.route.navigate(['/categories']);
-  //      this.loggedIn= true;
-  //    }, error=>{
-  //      console.log(error);
-  //    }) 
-  //  }  
 }

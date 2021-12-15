@@ -37,14 +37,14 @@ namespace RecipesApp.Controllers
         public async Task<ActionResult<GetUserRequest>> Login(RequestLoginDto loginModel)
         {
 
-            var _user = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == loginModel.username);
+            var _user = await _userManager.Users.SingleOrDefaultAsync(x => x.UserName == loginModel.Username);
             if (_user == null)
             {
                 return Unauthorized("Something went wrong, try again!");
             }
 
             var result = await _signInManager
-            .CheckPasswordSignInAsync(_user, loginModel.password, false);
+            .CheckPasswordSignInAsync(_user, loginModel.Password, false);
             
 
             if (!result.Succeeded) return Unauthorized();

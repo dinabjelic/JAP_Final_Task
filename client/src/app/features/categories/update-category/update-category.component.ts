@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgControlStatus } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateCategoryRequest } from 'app/core/requests/UpdateCategoryRequest';
 import { SharedService } from 'app/core/shared.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-category',
@@ -14,7 +15,8 @@ export class UpdateCategoryComponent implements OnInit {
   updateCategoryForm: FormGroup = new FormGroup({});
   updateCategoryrequest: UpdateCategoryRequest;
 
-  constructor(private formBuilder: FormBuilder, private service: SharedService, private router: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private service: SharedService, private router: ActivatedRoute,
+    private toastr:ToastrService,public route:Router) {
 
     this.updateCategoryForm = this.formBuilder.group({
       name: new FormControl(''),
@@ -35,9 +37,14 @@ export class UpdateCategoryComponent implements OnInit {
   updateCategory() {
     this.service.updateCategory(this.updateCategoryForm.value).subscribe(data => {
     }), err => {
+      this.toastr.error(err.error);
       console.log("Unable to update category for recipe");
     }
     this.updateCategoryForm.reset();
+    setTimeout(() => {
+      this.route.navigate(['/categories']);
+    }, 2000);
+    this.toastr.success("Category succesfully updated");
   }
 
 }

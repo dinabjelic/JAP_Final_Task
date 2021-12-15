@@ -34,12 +34,13 @@
                 type="button" class="btn btn-light mr-1" Button >See recipe details</button>
             </td>
             <td>
-                <button routerLink="/updaterecipe/{{dataItem.recipeId}}"
+                <button *ngIf="service.isAuthenticated" routerLink="/updaterecipe/{{dataItem.recipeId}}"
                 type="button" class="btn btn-light mr-1" Button >Update recipe</button>
             </td>
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
             <td>
-                <button (click)="deleteRecipe(dataItem.recipeId)"
-                type="button" class="btn btn-light mr-1" Button>Delete recipe</button>
+                <button *ngIf="service.isAuthenticated" (click)="deleteRecipe(dataItem.recipeId)"
+                type="button" class="btn btn-light mr-1" data-toggle="modal" Button>Delete recipe</button>
             </td>
         </tr>
 
@@ -48,6 +49,8 @@
 </table>
 </div>
 
+
+    
 
 
   

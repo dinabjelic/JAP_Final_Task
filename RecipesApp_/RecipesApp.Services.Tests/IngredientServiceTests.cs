@@ -44,7 +44,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            await _ingredientService.NewIngredient(ingredients);
+            await _ingredientService.NewIngredientAsync(ingredients);
 
             var recipeFromDb = await _context.IngredientsRecepies.Where(x=>x.RecipesId ==1 && x.IngredientsId==1).ToListAsync();
 
@@ -72,7 +72,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            await _ingredientService.NewIngredient(ingredients);
+            await _ingredientService.NewIngredientAsync(ingredients);
 
             var recipeFromDbOne = await _context.IngredientsRecepies.Where(x => x.RecipesId == 2 && x.IngredientsId == 2).ToListAsync();
             var recipeFromDbTwo = await _context.IngredientsRecepies.Where(x => x.RecipesId == 3 && x.IngredientsId == 3).ToListAsync();

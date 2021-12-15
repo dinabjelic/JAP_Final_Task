@@ -28,6 +28,7 @@ namespace RecipesApp_
             services.AddApplicationServices(_configuration);
             services.AddIdentiyServices(_configuration);
             services.AddDbContextService(_configuration);
+            services.AddLoggerDbContextService(_configuration);
             services.AddCors();
             services.AddAutoMapper(typeof(RecipesApp.Mapper.AutoMapper));
 
@@ -42,7 +43,6 @@ namespace RecipesApp_
             if (env.IsDevelopment())
             {
                 app.UseMiddleware<ExceptionMiddleware>();
-                //app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "RecipesApp_ v1"));
             }

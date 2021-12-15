@@ -11,6 +11,7 @@ using RecipesApp.Database;
 using RecipesApp.Database.Entities;
 using RecipesApp.Interfaces;
 using RecipesApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -72,20 +73,48 @@ namespace RecipesApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(PaginationParams paginationParams, IngredientSearch ingredientSearch,int? number)
+        //public async Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(PaginationParams paginationParams, IngredientSearch ingredientSearch,int? number)
+        //{
+        //    var ingredients = _context.Ingredients.AsQueryable();
+
+        //    ingredients = paginationParams.OrderBy switch
+        //    {
+        //        "name" => ingredients.OrderByDescending(u => u.Name),
+        //        "quantity"=> ingredients.OrderByDescending(u=>u.Quantity),
+        //        _ => ingredients.OrderBy(u => u.Price)
+        //    };
+
+        //    if (!string.IsNullOrEmpty(ingredientSearch.Name))
+        //    {
+        //        ingredients = ingredients.Where(x => x.Name.ToLower().Contains(ingredientSearch.Name.ToLower()));
+        //    }
+        //    if (ingredientSearch.Quantity.HasValue)
+        //    {
+        //        ingredients = ingredients.Where(x => x.Quantity == ingredientSearch.Quantity);
+        //    }
+        //    if (ingredientSearch.Measure.HasValue)
+        //    {
+        //        ingredients = ingredients.Where(x => x.Measure == ingredientSearch.Measure);
+        //    }
+
+        //    return await PagedList<GetIngredientsResponse>.CreateAsync(ingredients.ProjectTo<GetIngredientsResponse>
+        //        (_mapper.ConfigurationProvider).AsNoTracking(),paginationParams.PageNumber, paginationParams.PageSize=(int)number);
+        //}
+
+        public async Task<PagedList<GetIngredientsResponse>> GetAllIngredientsAsync(IngredientSearch ingredientSearch)
         {
             var ingredients = _context.Ingredients.AsQueryable();
 
-            ingredients = paginationParams.OrderBy switch
+            ingredients = ingredientSearch.OrderBy switch
             {
                 "name" => ingredients.OrderByDescending(u => u.Name),
-                "quantity"=> ingredients.OrderByDescending(u=>u.Quantity),
+                "quantity" => ingredients.OrderByDescending(u => u.Quantity),
                 _ => ingredients.OrderBy(u => u.Price)
             };
 
             if (!string.IsNullOrEmpty(ingredientSearch.Name))
             {
-                ingredients = ingredients.Where(x => x.Name.ToLower().Contains(ingredientSearch.Name));
+                ingredients = ingredients.Where(x => x.Name.ToLower().Contains(ingredientSearch.Name.ToLower()));
             }
             if (ingredientSearch.Quantity.HasValue)
             {
@@ -97,12 +126,16 @@ namespace RecipesApp.Services
             }
 
             return await PagedList<GetIngredientsResponse>.CreateAsync(ingredients.ProjectTo<GetIngredientsResponse>
-                (_mapper.ConfigurationProvider).AsNoTracking(),paginationParams.PageNumber, paginationParams.PageSize=(int)number);
+                (_mapper.ConfigurationProvider).AsNoTracking(), ingredientSearch.PageNumber, ingredientSearch.PageSize = (int)ingredientSearch.number);
         }
 
         public async Task UpdateIngredientAsync(UpdateIngredientRequest updateIngredientRequest)
         {
-            var ingredient = _context.Ingredients.Find(updateIngredientRequest.Id);
+            var ingredient =await _context.Ingredients.FirstOrDefaultAsync(x=>x.Id==updateIngredientRequest.Id);
+            if (ingredient == null)
+            {
+                throw new ArgumentException("Invalid ingredientId");
+            }
             _mapper.Map(updateIngredientRequest,ingredient);
 
             await _context.SaveChangesAsync();
@@ -110,7 +143,11 @@ namespace RecipesApp.Services
 
         public async Task DeleteIngredientAsync(int ingredientId)
         {
-            var ingredient = _context.Ingredients.Find(ingredientId);
+            var ingredient =await _context.Ingredients.FirstOrDefaultAsync(x=>x.Id==ingredientId);
+            if (ingredient == null)
+            {
+                throw new ArgumentException("Invalid ingredientId");
+            }
 
             _context.Ingredients.Remove(ingredient);
             await _context.SaveChangesAsync();

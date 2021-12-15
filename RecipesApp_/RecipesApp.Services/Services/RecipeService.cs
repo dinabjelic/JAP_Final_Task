@@ -137,14 +137,22 @@ namespace RecipesApp.Services
 
         public async Task UpdateRecipeAsync(UpdateRecipeRequest updateRecipeRequest)
         {
-            var recipe = _context.Recipes.Find(updateRecipeRequest.Id);
+            var recipe =await _context.Recipes.FirstOrDefaultAsync(x=>x.Id==updateRecipeRequest.Id);
+            if (recipe == null)
+            {
+                throw new ArgumentException("Invalid recipeId");
+            }
             _mapper.Map(updateRecipeRequest, recipe);
 
             await _context.SaveChangesAsync();
         }
         public async Task DeleteRecipeAsync(int recipeId)
         {
-            var recipe = _context.Recipes.Find(recipeId);
+            var recipe =await _context.Recipes.FirstOrDefaultAsync(x=>x.Id==recipeId);
+            if (recipe == null)
+            {
+                throw new ArgumentException("Invalid recipeId");
+            }
             _context.Recipes.Remove(recipe);
             await _context.SaveChangesAsync();
         }

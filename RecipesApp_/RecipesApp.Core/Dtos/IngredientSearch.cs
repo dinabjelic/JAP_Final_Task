@@ -1,16 +1,13 @@
 ﻿using RecipesApp.Common.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using RecipesApp.Core.Helpers;
 
 namespace RecipesApp.Core.Dtos
 {
-    public class IngredientSearch
+    public class IngredientSearch:PaginationParams
     {
         public string Name { get; set; }
         public int? Quantity { get; set; }
         public UnitMeasureType? Measure { get; set; }
+        public int? number { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RecipesApp.Database;
+using RecipesApp.LoggerDatabase;
 using System;
 using System.Collections.Generic;
 using System.Linq;

@@ -91,7 +91,7 @@ namespace RecipesApp.Services.Tests
                 }
             };
 
-            await _categoryService.NewRecipeCategory(1,recipeOne.CategoryId);
+            await _categoryService.NewRecipeCategoryAsync(1,recipeOne.CategoryId);
 
             var recipeFromDb = await _context.RecipesCategoryRecipes.Where(x => x.RecipesId == 1 && x.RecipesCategoryId==1).ToListAsync();
 

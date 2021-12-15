@@ -1,4 +1,5 @@
 ﻿using DatingApp.API.Controllers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RecipesApp.Core.Dtos;
 using RecipesApp.Core.Extensions;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace RecipesApp.Controllers
 {
-
+    [Authorize]
     public class IngredientsController : BaseApiController
     {
         private readonly IIngredientService _ingredientService;
@@ -43,9 +44,9 @@ namespace RecipesApp.Controllers
             }
         }
         [HttpGet("all-ingredients")]
-        public async Task<IActionResult> GetAllIngredients([FromQuery] PaginationParams paginationParams, [FromQuery] IngredientSearch ingredientSearch,int? number)
+        public async Task<IActionResult> GetAllIngredients([FromQuery]IngredientSearch ingredientSearch)
         {
-            var ingredients = await _ingredientService.GetAllIngredientsAsync(paginationParams, ingredientSearch,number);
+            var ingredients = await _ingredientService.GetAllIngredientsAsync(ingredientSearch);
 
             Response.AddPaginationHeader(ingredients.CurrentPage, ingredients.PageSize, ingredients.TotalCount, ingredients.TotalPages);
 

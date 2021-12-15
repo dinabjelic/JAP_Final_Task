@@ -66,15 +66,23 @@ namespace RecipesApp.Services
         public async Task UpdateCategoryAsync(UpdateCategoryRequest updateCategoryRequest)
         {
            
-               var recipesCategory = _context.RecipesCategories.Find(updateCategoryRequest.Id);
-               _mapper.Map(updateCategoryRequest, recipesCategory);
+            var recipesCategory = await _context.RecipesCategories.FirstOrDefaultAsync(x=>x.Id==updateCategoryRequest.Id);
+            if (recipesCategory == null)
+            {
+                throw new ArgumentException("Invalid categoryId");
+            }
+            _mapper.Map(updateCategoryRequest, recipesCategory);
 
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteCategoryAsync(int categorId)
+        public async Task DeleteCategoryAsync(int categoryId)
         {
-            var recipesCategory = _context.RecipesCategories.Find(categorId);
+            var recipesCategory =await _context.RecipesCategories.FirstOrDefaultAsync(x=>x.Id==categoryId);
+            if (recipesCategory == null)
+            {
+                throw new ArgumentException("Invalid categoryId");
+            }
 
             _context.RecipesCategories.Remove(recipesCategory);
             await _context.SaveChangesAsync();
