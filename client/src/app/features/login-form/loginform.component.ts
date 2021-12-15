@@ -45,7 +45,11 @@ export class LoginformComponent implements OnInit {
         localStorage.setItem('token', data.token);
         this.service.isAuthenticated = true;
         this.route.navigate(['/categories']);
-      });
+      },
+      (error)=>{
+        this.toastr.error("Invalid data");
+      }
+      )
       this.ngForm.reset();
     }
   }

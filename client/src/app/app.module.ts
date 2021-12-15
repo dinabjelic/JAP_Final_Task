@@ -16,7 +16,7 @@ import { RecipeDetailsComponent } from './features/recipes/recipe-details/recipe
 import { ShowrecipedetailsComponent } from './features/recipes/show-recipe-details/showrecipedetails.component';
 import { AddrecipeComponent } from './features/recipes/add-recipe/addrecipe.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { ShowformsComponent } from './features/show-forms/showforms.component';
+import { ShowformsComponent } from './features/recipes/show-forms/showforms.component';
 import {MatInputModule} from '@angular/material/input';
 import {MatIconModule} from '@angular/material/icon';
 import {MatCardModule} from '@angular/material/card';
@@ -25,7 +25,6 @@ import {PaginationModule} from 'ngx-bootstrap/pagination';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { LoginformComponent } from './features/login-form/loginform.component';
 import { NavComponent } from './shared/nav/nav.component';
-import { ShowloginComponent } from './features/show-login/showlogin.component';
 import { AddCategoryComponent } from './features/categories/add-category/add-category.component';
 import { UpdateCategoryComponent } from './features/categories/update-category/update-category.component';
 import { UpdateRecipeComponent } from './features/recipes/update-recipe/update-recipe.component';
@@ -56,7 +55,6 @@ import { NgxBootstrapConfirmModule } from 'ngx-bootstrap-confirm';
     ShowformsComponent,
     LoginformComponent,
     NavComponent,
-    ShowloginComponent,
     AddCategoryComponent,
     UpdateCategoryComponent,
     UpdateRecipeComponent,

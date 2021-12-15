@@ -21,7 +21,6 @@
           <tr>
               <th>Recipe name</th>
               <th>Recipe cost</th>
-              <th>Options</th>
           </tr>
     </thead>
     <tbody>
@@ -37,10 +36,12 @@
                 <button *ngIf="service.isAuthenticated" routerLink="/updaterecipe/{{dataItem.recipeId}}"
                 type="button" class="btn btn-light mr-1" Button >Update recipe</button>
             </td>
-            <td>
+      <td *ngIf="service.isAuthenticated"><i (click)="deleteRecipe(dataItem.recipeId)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
+
+            <!-- <td>
                 <button *ngIf="service.isAuthenticated" (click)="deleteRecipe(dataItem.recipeId)"
                 type="button" class="btn btn-light mr-1" data-toggle="modal" Button>Delete recipe</button>
-            </td>
+            </td> -->
         </tr>
 
     </tbody>

@@ -1,23 +1,15 @@
 <nav class="navbar" style="margin-top: 5%; width: 20%;">
-  <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.name" (input)="Search()"
-    placeholder="Enter ingredient name to search">
+  <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.name" (input)="Search()"   placeholder="Enter ingredient name to search">
 
-  <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.quantity" (input)="Search()"
-    placeholder="Enter quantity name to search">
-
-  <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.measure" (input)="Search()"
-    placeholder="Enter measure name to search">
+  <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.quantity" (input)="Search()" 
+  placeholder="Enter quantity name to search">
+  
+  <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.measure" (input)="Search()" 
+  placeholder="kg gr ml l">
 </nav>
 
+<button type="submit" *ngIf="service.isAuthenticated" class="btn btn-success" routerLink="addingredient"style="cursor: pointer; margin-left: 80%">Add ingredient</button>
 
-<button class="btn btn-primary"
-  (click)="loadIngredients(number=10,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 10</button>
-<button class="btn btn-primary"
-  (click)="loadIngredients(number=20,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 20</button>
-<button class="btn btn-primary"
-  (click)="loadIngredients(number=50,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 50</button>
-<button class="btn btn-primary"
-  (click)="loadIngredients(number=100,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 100</button>
 
 
 
@@ -48,8 +40,7 @@
 
   </tbody>
 </table>
-<button type="submit" *ngIf="service.isAuthenticated" class="btn btn-primary" routerLink="addingredient"
-  style="cursor: pointer; margin-left: 3%;">Add ingredient</button>
+
 
 
 <div class="d-flex justify-content-center" *ngIf="pagination">
@@ -64,4 +55,11 @@
     firstText="&laquo;" 
     lastText="&raquo;">
   </pagination>
+</div>
+
+<div class="footer" style="margin-left:35%;">
+<button class="btn btn-light"(click)="loadIngredients(number=10,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 10</button>
+<button class="btn btn-light"(click)="loadIngredients(number=20,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 20</button>
+<button class="btn btn-light"(click)="loadIngredients(number=50,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 50</button>
+<button class="btn btn-light"(click)="loadIngredients(number=100,this.pageNumber, this.pageSize, this.searchTerm,this.orderBy)">Load 100</button>
 </div>
