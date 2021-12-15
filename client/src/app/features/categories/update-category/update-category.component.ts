@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgControlStatus } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgControlStatus, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateCategoryRequest } from 'app/core/requests/UpdateCategoryRequest';
 import { SharedService } from 'app/core/shared.service';

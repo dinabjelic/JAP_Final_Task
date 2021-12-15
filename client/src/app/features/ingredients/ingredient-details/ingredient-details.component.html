@@ -25,12 +25,9 @@
 
   <thead>
     <tr>
-      <th><i (click)="loadIngredients(this.number,this.pageNumber,this.pageSize,this.searchTerm,'name')"
-          class="fa fa-sort"></i>Name</th>
-      <th><i (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'price')"
-          class="fa fa-sort"></i>Ingredient price</th>
-      <th><i (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'quantity')"
-          class="fa fa-sort"></i>Quantity</th>
+      <th><i (click)="loadIngredients(this.number,this.pageNumber,this.pageSize,this.searchTerm,'name')" class="fa fa-sort"></i>Name</th>
+      <th><i (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'price')" class="fa fa-sort"></i>Ingredient price</th>
+      <th><i (click)="loadIngredients(this.number,this.pageNumber, this.pageSize, this.searchTerm,'quantity')" class="fa fa-sort"></i>Quantity</th>
       <th>Measure</th>
     </tr>
   </thead>
@@ -45,10 +42,8 @@
         <button *ngIf="service.isAuthenticated" routerLink="/ingredients/{{dataItem.id}}" type="button"
           class="btn btn-light mr-1" Button>Update ingredient</button>
       </td>
-      <td>
-        <button *ngIf="service.isAuthenticated" (click)="deleteIngredient(dataItem.id)" type="button"
-          class="btn btn-light mr-1" Button>Delete recipe</button>
-      </td>
+      <td *ngIf="service.isAuthenticated"><i (click)="deleteIngredient(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
+      
     </tr>
 
   </tbody>

@@ -1,15 +1,12 @@
 <div>
-  <table class="table table-striped">
+  <table class="table table-striped table-hover">
 
-    <thead>
+    <thead style="text-align: center;">
       <tr>
         <th>Category recipe name</th>
-        <th>Option</th>
-        <th>Option</th>
-        <th>Option</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="text-align: center;">
       <tr *ngFor="let dataItem of CategoryRecipesList">
         <td>{{dataItem.name}}</td>
         <td>
@@ -18,22 +15,25 @@
         </td>
         <td>
           <button *ngIf="service.isAuthenticated" routerLink="/updatecategory/{{dataItem.id}}" type="button"
-            class="btn btn-light mr-1" Button>Update category</button>
+          class="btn btn-light mr-1" Button>Update category</button>
         </td>
-        <td>
-          <button *ngIf="service.isAuthenticated" (click)="deleteCategory(dataItem.id)" type="button"
-            class="btn btn-light mr-1" Button>Delete category</button>
-        </td>
+        <td *ngIf="service.isAuthenticated"><i (click)="deleteCategory(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
       </tr>
-
     </tbody>
   </table>
 </div>
 
 <div class="d-flex justify-content-center" *ngIf="pagination">
-  <pagination [boudaryLinks]="true" [totalItems]="pagination.totalItems" [itemsPerPage]="pagination.itemsPerPage"
-    [(ngModel)]="pagination.currentPage" (pageChanged)="pageChanged($event)" previousText="&lsaquo;" nextText="&rsaquo;"
-    firstText="&laquo;" lastText="&raquo;">
+  <pagination 
+  [boudaryLinks]="true" 
+  [totalItems]="pagination.totalItems" 
+  [itemsPerPage]="pagination.itemsPerPage"
+  [(ngModel)]="pagination.currentPage" 
+  (pageChanged)="pageChanged($event)" 
+  previousText="&lsaquo;" 
+  nextText="&rsaquo;"
+  firstText="&laquo;" 
+  lastText="&raquo;">
   </pagination>
 </div>
 

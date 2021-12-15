@@ -28,11 +28,11 @@ export class AddrecipeComponent implements OnInit {
   ngOnInit(): void {
 
     this.addRecipeForm = this.formBuilder.group({
-      'categoryId': new FormControl(''),
-      'name': new FormControl(''),
-      'userId': new FormControl(''),
-      'price': new FormControl(''),
-      'description': new FormControl(''),
+      'categoryId': new FormControl('',Validators.required),
+      'name': new FormControl('',Validators.required),
+      'userId': new FormControl('',Validators.required),
+      'price': new FormControl('',Validators.required),
+      'description': new FormControl('',Validators.required),
       ingredientsList: this.Ingredients
     })
 

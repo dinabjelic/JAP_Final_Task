@@ -1,16 +1,32 @@
-<form [formGroup]="updateIngredientForm" (submit)="updateIngredient()" style="margin-top: 200px;">
-    <p>
-        <input placeholder="Ingredient name" formControlName="name">
-    </p>
-    <p>
-        <input placeholder="Ingredient price" formControlName="price">
-    </p> 
-    <p>
-        <input placeholder="Ingredient quantity" formControlName="quantity">
-    </p> 
-    <p>
-        <input placeholder="kg gr ml l" formControlName="measure">
-    </p>
-    <button type="submit" class="btn btn-primary" style="cursor: pointer; margin-left: 3%;">Update category</button>
-</form>
 
+<div class="containter" style="margin-top: 10%">
+
+    <div class="row justify-content-center" >
+  
+      <div class="col-4" >
+  
+        <div class="card" style="width: 30rem; border: 1px solid green;" >
+   
+          <h1 style="text-align: center;padding-top: 10%;">Update ingredient form</h1>
+  
+          <form class="text-center border border-light p-5" [formGroup]="updateIngredientForm" (submit)="updateIngredient()">
+  
+            <input placeholder="Ingredient name" type="text" formControlName="name" class="form-control mb-4">
+  
+             <input placeholder="Ingredient price" type="text" formControlName="price" class="form-control mb-4">
+            
+             <input placeholder="Ingredient quantity" type="text" formControlName="quantity" class="form-control mb-4">
+            
+             <input placeholder="kg gr ml l" type="text" formControlName="measure" class="form-control mb-4">
+             
+             <button class="btn btn-success" type="submit">Update ingredient</button>
+          
+          </form>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+    
+  </div>

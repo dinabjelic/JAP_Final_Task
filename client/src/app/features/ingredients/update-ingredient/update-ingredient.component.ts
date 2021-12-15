@@ -1,8 +1,9 @@
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SharedService } from 'app/core/shared.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-update-ingredient',
@@ -13,7 +14,8 @@ export class UpdateIngredientComponent implements OnInit {
 
   updateIngredientForm: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder, private service: SharedService, private router: ActivatedRoute) {
+  constructor(private formBuilder: FormBuilder, private service: SharedService, private router: ActivatedRoute,
+    private toastr:ToastrService,public route:Router) {
     this.updateIngredientForm = this.formBuilder.group({
        id: new FormControl(''),
        name: new FormControl(''),
@@ -39,8 +41,13 @@ export class UpdateIngredientComponent implements OnInit {
   updateIngredient(){
     this.service.updateIngredient(this.updateIngredientForm.value).subscribe(data => {
     }), err => {
+      this.toastr.error(err.error);
       console.log("Unable to update ingredient ");
     }
     this.updateIngredientForm.reset();
+    setTimeout(() => {
+      this.route.navigate(['/ingredients']);
+    }, 2000);
+    this.toastr.success("Ingredient succesfully updated");
   }
 }

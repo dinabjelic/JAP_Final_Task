@@ -1,64 +1,91 @@
-<mat-card>
-  <form [formGroup]="addRecipeForm" (submit)="createRecipe()">
-    <div class="form-group">
-      <label> Choose category to add recipe</label>
-      <select class="form-conrol custom-dropdown" formControlName="categoryId" >
-        <option>Categories</option>
-        <option *ngFor="let dl of CategoryRecipesList" [value]="dl.categoryId">{{dl.categoryName}}</option>
-      </select>
+
+
+
+<div class="containter" style="margin-top: 5%">
+
+  <div class="row justify-content-center" >
+
+    <div class="col-4" >
+
+      <div class="card" style="width: 40rem; border: 1px solid green;" >
+ 
+        <h1 style="text-align: center;padding-top: 10%;">Add recipe form</h1>
+
+        <form class="text-center border border-light p-5" [formGroup]="addRecipeForm" (submit)="createRecipe()">
+
+          <div class="form-group">
+
+            <label> Choose category to add recipe</label>
+
+            <select class="form-conrol custom-dropdown" formControlName="categoryId" >
+          
+                <option>Categories</option>
+          
+                <option *ngFor="let dl of CategoryRecipesList" [value]="dl.categoryId">{{dl.categoryName}}</option>
+          
+            </select>
+          
+          </div>
+
+          <input placeholder="Recipe name" type="text" formControlName="name" class="form-control mb-4">
+
+           <p style="color: red;" *ngIf="addRecipeForm.get('name').touched && addRecipeForm.get('name').hasError('required')">Required field</p>
+
+           <input placeholder="UserID" type="text" formControlName="userId" class="form-control mb-4">
+
+           <p style="color: red;" *ngIf="addRecipeForm.get('userId').touched && addRecipeForm.get('userId').hasError('required')">Required field</p>
+
+           <input placeholder="Recipe price" type="text" formControlName="price" class="form-control mb-4">
+
+           <p style="color: red;" *ngIf="addRecipeForm.get('price').touched && addRecipeForm.get('price').hasError('required')">Required field</p>
+
+           <input placeholder="Recipe description" type="text" formControlName="description" class="form-control mb-4">
+
+           <p style="color: red;" *ngIf="addRecipeForm.get('description').touched && addRecipeForm.get('description').hasError('required')">Required field</p>
+        
+          
+                <div class="card" style="width: 34rem; border: 1px solid green;" >
+           
+                  <h1 style="text-align: center;padding-top: 10%;">Infredient form</h1>
+          
+                  <form class="text-center border border-light p-5" [formGroup]="ingredientForm " (ngSubmit)="onSubmit()">
+
+                      <div class="form-group">
+
+                        <label> Choose ingredient for the recipe</label>
+
+                        <select class="form-conrol custom-dropdown" formControlName="id" >
+
+                          <option>Ingredients</option>
+
+                          <option *ngFor="let dl of IngredientsForm" [value]="dl.id">{{dl.name}}</option>
+
+                        </select>
+                      
+                      </div>
+          
+                    <input placeholder="Quanttiy" type="text" formControlName="quantity" class="form-control mb-4">
+          
+                     <p style="color: red;" *ngIf="ingredientForm.get('quantity').touched && ingredientForm.get('quantity').hasError('required')">Required field</p>
+                    
+                    <input placeholder="kg gr ml l" type="text"  formControlName="measure" class="form-control mb-4">
+          
+                     <p style="color: red;" *ngIf="ingredientForm.get('measure').touched && ingredientForm.get('measure').hasError('required')">Required field</p>
+                    
+                    <button class="btn btn-success" type="submit" [disabled]="!ingredientForm.valid">Add ingredient</button>
+                  
+                  </form>
+          
+                </div>
+
+           <button class="btn btn-success" type="submit" [disabled]="!addRecipeForm.valid" style="margin-top: 5%; margin-right: 2%;">Add recipe</button>
+        
+        </form>
+
+      </div>
+
     </div>
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Recipe name</mat-label>
-        <input matInput placeholder="Recipe name" formControlName="name">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="outline" >
-        <mat-label>UserId</mat-label>
-        <input matInput placeholder="You have to write down UserID=1" formControlName="userId">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="outline">
-        <mat-label>Price</mat-label>
-        <input matInput placeholder="Price" formControlName="price">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-    </p>
-    <p>
-      <mat-form-field appearance="outline" id="decsription">
-        <mat-label>Description</mat-label>
-        <input matInput placeholder="Description" formControlName="description">
-        <mat-icon matSuffix>sentiment_very_satisfied</mat-icon>
-      </mat-form-field>
-    </p>
-    <form [formGroup]="ingredientForm " (ngSubmit)="onSubmit()" id="minForm" > 
-              <div class="dropdown">
-                  <div class="form-group">
-                    <label> Choose ingredient to add recipe</label>
-                    <select class="form-conrol custom-dropdown" formControlName="id" >
-                      <option>Ingredients</option>
-                      <option *ngFor="let dl of IngredientsForm" [value]="dl.id">{{dl.name}}</option>
-                    </select>
-                  </div>
 
-                  <div class="input-group mb-3"style="width: 80%; margin-left: 5%;">
-              <span style="display: block;" class="input-group mb-3"> Quantity</span>
-              <input class="form-control" formControlName="quantity">
-            </div>
-            <div class="input-group mb-3" style="width: 80%; margin-left: 5%;">
-              <span  style="display: block;" class="input-group mb-3">Measure</span>
-              <input class="form-control" formControlName="measure" placeholder="kg, g, ml, l">
-            </div>
-
-              <button type="submit" class="btn btn-primary" style="cursor: pointer; margin-left: 3%;">Add ingredient</button>
-            </div>
-    </form>
-    <p>
-      <button type="submit" class="btn btn-secondary" style="margin-top: 10%; margin-left:-10%;">Create recipe</button>
-    </p>
-  </form>
-</mat-card>
+  </div>
+  
+</div>

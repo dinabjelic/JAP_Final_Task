@@ -1,36 +1,4 @@
 
-mat-card{
-    background-color:rgb(207, 228, 214);
-    width: 80%;
-    margin-left: 10%;
-    float: left;
-    margin-top: 5%;
-
-}
-p{
-    margin-left: 10%;
-}
-form{
-    color: black;
-}
-mat-label{
-    color: black;
-    float: left;
-}
-.list-group{
-    width: 40%;
-    position: absolute;
-    right: 110%;
-    margin-top: -90%;
-}
-ul li{
-    font-weight: bold;
-}
 .containter{
-    margin-top: 10%;
-}
-.dropdown{
- border: 1px solid gray;
- width: 30%;
- margin-left: 8%;
+    margin-right: 20%;
 }

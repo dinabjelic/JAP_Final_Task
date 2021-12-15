@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SharedService } from 'app/core/shared.service';
 import { ToastrService } from 'ngx-toastr';
@@ -17,7 +17,7 @@ export class AddCategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.addCategoryForm = this.formBuilder.group({
-      'name': new FormControl(''),
+      'name': new FormControl('',[Validators.required]),
     })
   }
   addCategory()

@@ -16,7 +16,7 @@ export class CategoryRecipesComponent implements OnInit {
   pagination: Pagination;
   pageNumber = 1;
   pageSize = 10;
-  constructor(private service: SharedService, public toastr: ToastrService, private ngxBootstrapConfirmService: NgxBootstrapConfirmService) { }
+  constructor(public service: SharedService, public toastr: ToastrService, private ngxBootstrapConfirmService: NgxBootstrapConfirmService) { }
 
   ngOnInit(): void {
     this.loadCategories();
