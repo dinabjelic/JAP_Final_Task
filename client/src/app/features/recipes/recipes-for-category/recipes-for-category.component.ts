@@ -1,10 +1,10 @@
 import { SelectorMatcher } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RecipeService } from 'app/core/services/recipe.service';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 import { ToastrService } from 'ngx-toastr';
 import { RecipesCategories } from '../../../core/models/RecipesCategories';
-import { SharedService } from '../../../core/shared.service';
 
 @Component({
   selector: 'app-recipes-for-category',
@@ -19,7 +19,7 @@ export class RecipesForCategoryComponent implements OnInit {
   searchTerm:string="";
   recipeCategoryId:number;
  
-  constructor(private service:SharedService, private route:ActivatedRoute,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
+  constructor(public service:RecipeService, private route:ActivatedRoute,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
     private toastr:ToastrService) { }
 
 

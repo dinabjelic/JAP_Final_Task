@@ -58,11 +58,11 @@ namespace RecipesApp.Interfaces
         /// <returns></returns>
         Task DeleteIngredientAsync(int ingredientId);
         /// <summary>
-        ///  Gets current ingredient data search by id
+        ///  Gets current ingredient data requested by id
         /// </summary>
         /// <param name="ingredientId"></param>
         /// <returns></returns>
-        Task<List<Ingredient>> GetCurrentDataAsync(int ingredientId);
+        Task<Ingredient> GetByIdAsync(int ingredientId);
 
     }
 }

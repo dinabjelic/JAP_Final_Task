@@ -10,11 +10,14 @@
 
         <form class="text-center border border-light p-5" [formGroup]="updateRecipeForm" (submit)="updateRecipe()">
 
+          <h3 style="padding-right:70%;">Recipe name</h3>
           <input placeholder="Recipe name" type="text" formControlName="name" class="form-control mb-4">
 
-          <input placeholder="Recipe price" type="text" formControlName="price" class="form-control mb-4">
+          <h3 style="padding-right:70%;">Recipe price</h3>
+          <input placeholder="Recipe price" type="number" formControlName="price" class="form-control mb-4">
 
-          <input placeholder="Recipe description" type="text" formControlName="description" class="form-control mb-4">
+          <h3 style="padding-right:60%;">Recipe description</h3>
+          <textarea cols="40" rows="5" placeholder="Recipe description" type="text" formControlName="description" class="form-control mb-4"></textarea>
 
            <button class="btn btn-success" type="submit" >Update recipe</button>
         

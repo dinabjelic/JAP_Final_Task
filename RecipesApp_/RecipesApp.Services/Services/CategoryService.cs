@@ -57,28 +57,39 @@ namespace RecipesApp.Services
 
         public async Task AddCategoryAsync(AddCategoryRequest addCategoryRequest)
         {
-            var dbRecipeCategory = _mapper.Map<RecipeCategory>(addCategoryRequest);
+            if (addCategoryRequest == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
 
+            var dbRecipeCategory = _mapper.Map<RecipeCategory>(addCategoryRequest);
             await _context.RecipesCategories.AddAsync(dbRecipeCategory);
             await _context.SaveChangesAsync();
         }
 
         public async Task UpdateCategoryAsync(UpdateCategoryRequest updateCategoryRequest)
         {
-           
+            if (updateCategoryRequest == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
+
             var recipesCategory = await _context.RecipesCategories.FirstOrDefaultAsync(x=>x.Id==updateCategoryRequest.Id);
+
             if (recipesCategory == null)
             {
                 throw new ArgumentException("Invalid categoryId");
             }
-            _mapper.Map(updateCategoryRequest, recipesCategory);
 
+            _mapper.Map(updateCategoryRequest, recipesCategory);
+            _context.RecipesCategories.Update(recipesCategory);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteCategoryAsync(int categoryId)
         {
             var recipesCategory =await _context.RecipesCategories.FirstOrDefaultAsync(x=>x.Id==categoryId);
+
             if (recipesCategory == null)
             {
                 throw new ArgumentException("Invalid categoryId");
@@ -88,9 +99,14 @@ namespace RecipesApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<RecipeCategory>> GetCurrentDataAsync(int categoryId)
+        public async Task<RecipeCategory> GetByIdAsync(int categoryId)
         {
-            var currentData = await _context.RecipesCategories.Where(x => x.Id == categoryId).ToListAsync();
+            var currentData = await _context.RecipesCategories.FirstOrDefaultAsync(x => x.Id == categoryId);
+
+            if (currentData == null)
+            {
+                throw new ArgumentException("Invalid categoryId");
+            }
 
             return currentData;
         }

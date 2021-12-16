@@ -46,10 +46,10 @@ namespace RecipesApp.Interfaces
         /// <returns></returns>
         Task DeleteCategoryAsync(int categorId);
         /// <summary>
-        /// Gets current category data search by id
+        /// Gets current category data requested by id
         /// </summary>
         /// <param name="categoryId"></param>
         /// <returns></returns>
-        Task<List<RecipeCategory>> GetCurrentDataAsync(int categoryId);
+        Task<RecipeCategory> GetByIdAsync(int categoryId);
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedService } from 'app/core/shared.service';
+import { RecipeService } from 'app/core/services/recipe.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,7 +13,7 @@ export class UpdateRecipeComponent implements OnInit {
 
   updateRecipeForm: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder, private service: SharedService, private router: ActivatedRoute,
+  constructor(private formBuilder: FormBuilder, private service: RecipeService, private router: ActivatedRoute,
     private toastr:ToastrService,public route:Router) { 
     this.updateRecipeForm = this.formBuilder.group
     ({
@@ -22,22 +22,22 @@ export class UpdateRecipeComponent implements OnInit {
        price: new FormControl(''),
        description: new FormControl('')
     })
+    console.log(this.router.snapshot.params.id);
   }
-
+  
   ngOnInit(): void {
-
+    
     this.service.getCurrentRecipeData(this.router.snapshot.params.id).subscribe((data)=>{
-      this.updateRecipeForm = this.formBuilder.group
+      this.updateRecipeForm = new FormGroup
       ({
-         id: new FormControl(this.router.snapshot.params.id),
-         name: new FormControl(data[0].name),
-         price: new FormControl(data[0].price),
-         description: new FormControl(data[0].description)
+        id: new FormControl(this.router.snapshot.params.id),
+        name: new FormControl(data['name']),
+        price: new FormControl(data['price']),
+        description: new FormControl(data['description']),
       })
     })
-    
   }
-
+  
   updateRecipe() {
     this.service.updateRecipe(this.updateRecipeForm.value).subscribe(data => {
     }), err => {

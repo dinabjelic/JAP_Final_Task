@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { RecipeService } from 'app/core/services/recipe.service';
 import { RecipesCategories } from '../../../core/models/RecipesCategories';
-import { SharedService } from '../../../core/shared.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -15,7 +15,7 @@ export class RecipeDetailsComponent implements OnInit {
   names: RecipesCategories;
   sum:number;
 
- constructor(private service:SharedService, private route:ActivatedRoute) { }
+ constructor(private service:RecipeService, private route:ActivatedRoute) { }
 
   ngOnInit(): void {
 

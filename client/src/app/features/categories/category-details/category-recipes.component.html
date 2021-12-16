@@ -14,10 +14,10 @@
             details</button>
         </td>
         <td>
-          <button *ngIf="service.isAuthenticated" routerLink="/updatecategory/{{dataItem.id}}" type="button"
+          <button *ngIf="!service.isAuthenticated" routerLink="/updatecategory/{{dataItem.id}}" type="button"
           class="btn btn-light mr-1" Button>Update category</button>
         </td>
-        <td *ngIf="service.isAuthenticated"><i (click)="deleteCategory(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
+        <td *ngIf="!service.isAuthenticated"><i (click)="deleteCategory(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
       </tr>
     </tbody>
   </table>

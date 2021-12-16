@@ -24,12 +24,12 @@ namespace RecipesApp.Services
         private readonly RecipesDbContext _context;
         private readonly IMapper _mapper;
 
-
         public IngredientService(RecipesDbContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
+
         public async Task<List<GetIngredientResponse>> IngredientsListAsync()
         {
             var ingredientList = await _context.Ingredients
@@ -41,6 +41,7 @@ namespace RecipesApp.Services
 
             return ingredientList;
         }
+
         public Task<IEnumerable<GetIngredientModel>> GetIngredientsAsync(int MeasureType, int MinQuantity, int MaxQuantity)
         {
             var parameters = new DynamicParameters();
@@ -51,6 +52,7 @@ namespace RecipesApp.Services
             return _context.Database.GetDbConnection().QueryAsync<GetIngredientModel>("GetIngredients",parameters,commandType: CommandType.StoredProcedure);
 
         }
+
         public async Task NewIngredientAsync(List<IngredientRequest> list)
         {
             foreach (var item in list)
@@ -65,10 +67,15 @@ namespace RecipesApp.Services
             }
             await _context.SaveChangesAsync();
         }
+
         public async Task AddIngredientAsync(AddIngredientRequest addIngredientRequest)
         {
-            var dbIngredient = _mapper.Map<Ingredient>(addIngredientRequest);
+            if (addIngredientRequest == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
 
+            var dbIngredient = _mapper.Map<Ingredient>(addIngredientRequest);
             await _context.Ingredients.AddAsync(dbIngredient);
             await _context.SaveChangesAsync();
         }
@@ -103,19 +110,27 @@ namespace RecipesApp.Services
 
         public async Task UpdateIngredientAsync(UpdateIngredientRequest updateIngredientRequest)
         {
+            if (updateIngredientRequest == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
+
             var ingredient =await _context.Ingredients.FirstOrDefaultAsync(x=>x.Id==updateIngredientRequest.Id);
+
             if (ingredient == null)
             {
                 throw new ArgumentException("Invalid ingredientId");
             }
-            _mapper.Map(updateIngredientRequest,ingredient);
 
+            _mapper.Map(updateIngredientRequest,ingredient);
+            _context.Ingredients.Update(ingredient);
             await _context.SaveChangesAsync();
         }
 
         public async Task DeleteIngredientAsync(int ingredientId)
         {
             var ingredient =await _context.Ingredients.FirstOrDefaultAsync(x=>x.Id==ingredientId);
+
             if (ingredient == null)
             {
                 throw new ArgumentException("Invalid ingredientId");
@@ -125,9 +140,14 @@ namespace RecipesApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Ingredient>> GetCurrentDataAsync(int ingredientId)
+        public async Task<Ingredient> GetByIdAsync(int ingredientId)
         {
-            var currentData = await _context.Ingredients.Where(x => x.Id == ingredientId).ToListAsync();
+            var currentData = await _context.Ingredients.FirstOrDefaultAsync(x => x.Id == ingredientId);
+
+            if (currentData == null)
+            {
+                throw new ArgumentException("Invalid categoryId");
+            }
 
             return currentData;
         }

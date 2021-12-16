@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { SharedService } from '../../core/shared.service';
+import { AutheticationService } from 'app/core/services/authetication.service';
 
 @Component({
   selector: 'app-nav',
@@ -11,7 +11,7 @@ export class NavComponent implements OnInit {
 
   loggedIn: boolean;
   
-  constructor(public service:SharedService, private route:Router) { }
+  constructor(public service:AutheticationService, private route:Router) { }
 
   ngOnInit(): void {
   }

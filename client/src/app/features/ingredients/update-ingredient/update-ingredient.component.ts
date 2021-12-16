@@ -2,7 +2,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SharedService } from 'app/core/shared.service';
+import { IngredientService } from 'app/core/services/ingredient.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -14,7 +14,7 @@ export class UpdateIngredientComponent implements OnInit {
 
   updateIngredientForm: FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder, private service: SharedService, private router: ActivatedRoute,
+  constructor(private formBuilder: FormBuilder, private service: IngredientService, private router: ActivatedRoute,
     private toastr:ToastrService,public route:Router) {
     this.updateIngredientForm = this.formBuilder.group({
        id: new FormControl(''),
@@ -30,10 +30,10 @@ export class UpdateIngredientComponent implements OnInit {
     this.service.getCurrentIngredientData(this.router.snapshot.params.id).subscribe((data)=>{
       this.updateIngredientForm = this.formBuilder.group({
         id: new FormControl(this.router.snapshot.params.id),
-        name: new FormControl(data[0].name),
-        price: new FormControl(data[0].price),
-        quantity: new FormControl(data[0].quantity), 
-        measure: new FormControl(data[0].measure)
+        name: new FormControl(data['name']),
+        price: new FormControl(data['price']),
+        quantity: new FormControl(data['quantity']), 
+        measure: new FormControl(data['measure'])
      })
     })
   }

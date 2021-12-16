@@ -17,11 +17,9 @@
 
             <label> Choose category to add recipe</label>
 
-            <select class="form-conrol custom-dropdown" formControlName="categoryId" >
+            <select class="form-conrol custom-dropdown" formControlName="categoryId" type="number">
           
-                <option>Categories</option>
-          
-                <option *ngFor="let dl of CategoryRecipesList" [value]="dl.categoryId">{{dl.categoryName}}</option>
+                <option type="number" *ngFor="let dl of CategoryRecipesList" [value]="dl.categoryId">{{dl.categoryName}}</option>
           
             </select>
           
@@ -31,11 +29,11 @@
 
            <p style="color: red;" *ngIf="addRecipeForm.get('name').touched && addRecipeForm.get('name').hasError('required')">Required field</p>
 
-           <input placeholder="UserID" type="text" formControlName="userId" class="form-control mb-4">
+           <input placeholder="UserID" type="number" formControlName="userID" class="form-control mb-4">
 
-           <p style="color: red;" *ngIf="addRecipeForm.get('userId').touched && addRecipeForm.get('userId').hasError('required')">Required field</p>
+           <p style="color: red;" *ngIf="addRecipeForm.get('userID').touched && addRecipeForm.get('userID').hasError('required')">Required field</p>
 
-           <input placeholder="Recipe price" type="text" formControlName="price" class="form-control mb-4">
+           <input placeholder="Recipe price" type="number" formControlName="price" class="form-control mb-4">
 
            <p style="color: red;" *ngIf="addRecipeForm.get('price').touched && addRecipeForm.get('price').hasError('required')">Required field</p>
 
@@ -54,17 +52,15 @@
 
                         <label> Choose ingredient for the recipe</label>
 
-                        <select class="form-conrol custom-dropdown" formControlName="id" >
+                        <select class="form-conrol custom-dropdown" formControlName="id" type="number">
 
-                          <option>Ingredients</option>
-
-                          <option *ngFor="let dl of IngredientsForm" [value]="dl.id">{{dl.name}}</option>
+                          <option type="number" *ngFor="let dl of IngredientsForm" [value]="dl.id">{{dl.name}}</option>
 
                         </select>
                       
                       </div>
           
-                    <input placeholder="Quanttiy" type="text" formControlName="quantity" class="form-control mb-4">
+                    <input placeholder="Quanttiy" type="number" formControlName="quantity" class="form-control mb-4">
           
                      <p style="color: red;" *ngIf="ingredientForm.get('quantity').touched && ingredientForm.get('quantity').hasError('required')">Required field</p>
                     

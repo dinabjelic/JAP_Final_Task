@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, NgControlStatus, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UpdateCategoryRequest } from 'app/core/requests/UpdateCategoryRequest';
-import { SharedService } from 'app/core/shared.service';
+import { CategoryService } from 'app/core/services/category.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -15,7 +15,7 @@ export class UpdateCategoryComponent implements OnInit {
   updateCategoryForm: FormGroup = new FormGroup({});
   updateCategoryrequest: UpdateCategoryRequest;
 
-  constructor(private formBuilder: FormBuilder, private service: SharedService, private router: ActivatedRoute,
+  constructor(private formBuilder: FormBuilder, private service: CategoryService, private router: ActivatedRoute,
     private toastr:ToastrService,public route:Router) {
 
     this.updateCategoryForm = this.formBuilder.group({
@@ -28,7 +28,7 @@ export class UpdateCategoryComponent implements OnInit {
     this.service.getCurrentCategoryData(this.router.snapshot.params.id).subscribe((data) => {
       
       this.updateCategoryForm = new FormGroup({
-        name: new FormControl(data[0].name),
+        name: new FormControl(data['name']),
         id: new FormControl(this.router.snapshot.params.id)
       })
     })

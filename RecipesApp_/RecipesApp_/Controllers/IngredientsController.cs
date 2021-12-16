@@ -33,16 +33,10 @@ namespace RecipesApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddIngredient(AddIngredientRequest addIngredientRequest)
         {
-            if (addIngredientRequest != null)
-            {
-                await _ingredientService.AddIngredientAsync(addIngredientRequest);
-                return Ok("You successed");
-            }
-            else
-            {
-                return NotFound();
-            }
+              await _ingredientService.AddIngredientAsync(addIngredientRequest);
+              return Ok("You succeeded");
         }
+
         [HttpGet("all-ingredients")]
         public async Task<IActionResult> GetAllIngredients([FromQuery]IngredientSearch ingredientSearch)
         {
@@ -52,36 +46,25 @@ namespace RecipesApp.Controllers
 
             return Ok(ingredients);
         }
+
         [HttpPut]
         public async Task<IActionResult> UpdateIngredient(UpdateIngredientRequest updateIngredientRequest)
         {
-            if (updateIngredientRequest.Id != 0)
-            {
-                await _ingredientService.UpdateIngredientAsync(updateIngredientRequest);
-                return Ok("You successed");
-            }
-            else
-            {
-                return NotFound();
-            }
+             await _ingredientService.UpdateIngredientAsync(updateIngredientRequest);
+             return Ok("You successed");
         }
+
         [HttpDelete("{ingredientId}")]
         public async Task<IActionResult> DeleteIngredient(int ingredientId)
         {
-            if(ingredientId != 0)
-            {
-                await _ingredientService.DeleteIngredientAsync(ingredientId);
-                return Ok("You successed");
-            }
-            else
-            {
-                return NotFound();
-            }
+              await _ingredientService.DeleteIngredientAsync(ingredientId);
+              return Ok("You successed");
         }
+
         [HttpGet("{ingredientId}")]
         public async Task<IActionResult> GetCurrentIngredientData(int ingredientId)
         {
-            return Ok(await _ingredientService.GetCurrentDataAsync(ingredientId));
+            return Ok(await _ingredientService.GetByIdAsync(ingredientId));
         }
     }
 }

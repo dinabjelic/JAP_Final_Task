@@ -18,6 +18,7 @@ namespace RecipesApp.Services.Services
     {
         private readonly RecipesDbContext _recipesDbContext;
         private readonly DbConnection _dbConnection;
+
         public RecipeProcedureService(RecipesDbContext recipesDbContext)
         {
             _recipesDbContext = recipesDbContext;
@@ -28,6 +29,7 @@ namespace RecipesApp.Services.Services
         {
             return await _dbConnection.QueryAsync<GetRecipesModel>("GetRecipes", commandType: CommandType.StoredProcedure);
         }
+
         public async Task<IEnumerable<GetAllRecipesModel>> GetAllRecipesAsync()
         {
             return await _dbConnection.QueryAsync<GetAllRecipesModel>("GetAllRecipes", commandType: CommandType.StoredProcedure);

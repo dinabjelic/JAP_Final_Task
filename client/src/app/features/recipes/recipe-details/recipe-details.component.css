@@ -13,18 +13,13 @@ table thead tr{
     width: 90%;
 }
 .container{
- border: 1px solid red;
+ border: 2px solid green;
  font-weight: bold;
 }
 .container_{
     margin-top: 10%;
 }
 
-h5{
-    margin-top: 2%;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-}
 p{
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;

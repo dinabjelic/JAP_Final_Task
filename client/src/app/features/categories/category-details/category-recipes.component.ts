@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipesCategory } from 'app/core/models/RecipeCategory';
 import { Pagination } from '../../../core/helpers/Pagination';
-import { SharedService } from '../../../core/shared.service';
 import { ToastrService } from 'ngx-toastr';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
+import { CategoryService } from 'app/core/services/category.service';
 
 @Component({
   selector: 'app-category-recipes',
@@ -16,7 +16,7 @@ export class CategoryRecipesComponent implements OnInit {
   pagination: Pagination;
   pageNumber = 1;
   pageSize = 10;
-  constructor(public service: SharedService, public toastr: ToastrService, private ngxBootstrapConfirmService: NgxBootstrapConfirmService) { }
+  constructor(public service: CategoryService, public toastr: ToastrService, private ngxBootstrapConfirmService: NgxBootstrapConfirmService) { }
 
   ngOnInit(): void {
     this.loadCategories();

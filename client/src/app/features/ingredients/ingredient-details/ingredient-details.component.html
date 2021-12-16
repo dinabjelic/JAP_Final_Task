@@ -31,10 +31,10 @@
       <td>{{dataItem.quantity}}</td>
       <td>{{dataItem.measure}}</td>
       <td>
-        <button *ngIf="service.isAuthenticated" routerLink="/ingredients/{{dataItem.id}}" type="button"
+        <button *ngIf="!service.isAuthenticated" routerLink="/ingredients/{{dataItem.id}}" type="button"
           class="btn btn-light mr-1" Button>Update ingredient</button>
       </td>
-      <td *ngIf="service.isAuthenticated"><i (click)="deleteIngredient(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
+      <td *ngIf="!service.isAuthenticated"><i (click)="deleteIngredient(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
       
     </tr>
 

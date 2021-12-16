@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { IngredientSearch } from 'app/core/dtos/IngredientSearch';
 import { PaginatedResult, Pagination } from 'app/core/helpers/Pagination';
 import { GetIngredientsResponse } from 'app/core/responses/GetIngredientsResponse';
-import { SharedService } from 'app/core/shared.service';
+import { IngredientService } from 'app/core/services/ingredient.service';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 import { ToastrService } from 'ngx-toastr';
 
@@ -24,7 +24,7 @@ export class IngredientDetailsComponent implements OnInit {
   number=5;
 
 
-  constructor(public service: SharedService,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
+  constructor(public service: IngredientService,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
     private toastr:ToastrService,public route:Router) {
   }
 

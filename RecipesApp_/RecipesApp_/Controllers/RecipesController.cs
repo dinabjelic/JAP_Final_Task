@@ -16,7 +16,6 @@ namespace RecipesApp.Controllers
 
         private readonly IRecipeService _categoryRecipes;
         private readonly IGetRecipeService _getRecipeService;
-        
 
         public RecipesController(IRecipeService categoryRecipes, IGetRecipeService getRecipeService)
         {
@@ -25,7 +24,7 @@ namespace RecipesApp.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("{recipeCategoryId}")]
+        [HttpGet("get-by-category/{recipeCategoryId}")]
         public async Task<IActionResult> GetRecipesForCategory(int recipeCategoryId,string searchTerm)
         {
             var recipesCategory = await _categoryRecipes.GetRecipesForCategoryAsync(recipeCategoryId,searchTerm);
@@ -56,15 +55,8 @@ namespace RecipesApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddRecipe(AddRecipeRequest recipesModel)
         {
-            if (recipesModel.UserID != 0)
-            {
-                await _categoryRecipes.AddRecipeAsync(recipesModel);
-                return Ok("You successed");
-            }
-            else
-            {
-                return NotFound();
-            }
+            await _categoryRecipes.AddRecipeAsync(recipesModel);
+            return Ok("You successed");
         }
 
         [HttpGet]
@@ -78,6 +70,7 @@ namespace RecipesApp.Controllers
         {
             return Ok(await _getRecipeService.GetAllRecipesAsync());
         }
+
         [HttpPut]
         public async Task<IActionResult> UpdateRecipe(UpdateRecipeRequest updateRecipeRequest)
         {
@@ -91,6 +84,7 @@ namespace RecipesApp.Controllers
                 return NotFound();
             }
         }
+
         [HttpDelete("{recipeId}")]
         public async Task<IActionResult> DeleteRecipe(int recipeId)
         {
@@ -104,6 +98,7 @@ namespace RecipesApp.Controllers
                 return NotFound();
             }
         }
+
         [HttpPut("update-recipe-details")]
         public async Task<IActionResult> UpdateRecipesDetailsAsync(UpdateRecipeDetailsRequest updateRecipeDetailsRequest)
         {
@@ -117,10 +112,11 @@ namespace RecipesApp.Controllers
                 return NotFound();
             }
         }
-        [HttpGet("current-data/{recipeId}")]
+
+        [HttpGet("{recipeId}")]
         public async Task<IActionResult> GetCurrentRecipeData(int recipeId)
         {
-            return Ok(await _categoryRecipes.GetCurrentDataAsync(recipeId));
+            return Ok(await _categoryRecipes.GetByIdAsync(recipeId));
         }
     }
 }

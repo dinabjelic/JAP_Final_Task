@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SharedService } from '../../core/shared.service';
 import { User } from '../../core/models/User';
 import { LoginInsertRequest } from 'app/core/models/LoginInsertRequest';
 import { ToastrService } from 'ngx-toastr';
+import { AutheticationService } from 'app/core/services/authetication.service';
 
 @Component({
   selector: 'app-loginform',
@@ -22,7 +22,7 @@ export class LoginformComponent implements OnInit {
   data: any;
 
 
-  constructor(private formBuilder: FormBuilder, private service: SharedService, private route: Router,private toastr:ToastrService) { }
+  constructor(private formBuilder: FormBuilder, private service: AutheticationService, private route: Router,private toastr:ToastrService) { }
 
   ngOnInit(): void {
     if (this.service.isAuthenticated) {

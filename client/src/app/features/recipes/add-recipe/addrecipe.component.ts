@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CategoryService } from 'app/core/services/category.service';
+import { IngredientService } from 'app/core/services/ingredient.service';
+import { RecipeService } from 'app/core/services/recipe.service';
 import { ToastrService } from 'ngx-toastr';
 import { AddRecipes } from '../../../core/models/AddRecipes';
-import { IngredientList } from '../../../core/models/IngredientList';
 import { Ingredients } from '../../../core/models/Ingredients';
-import { SharedService } from '../../../core/shared.service';
 
 @Component({
   selector: 'app-addrecipe',
@@ -19,22 +20,23 @@ export class AddrecipeComponent implements OnInit {
   CategoryRecipesList: AddRecipes[] = [];
   Ingredients: Ingredients[] = [];
   IngredientsForm: Ingredients[]=[];
-  
+
   public ingredientForm = this.formBuilder.group({
     quantity: ['', Validators.required],
     measure: ['', Validators.required],
     id : ['', Validators.required]
   })
-  
-  constructor(private formBuilder: FormBuilder, private service: SharedService,private toastr:ToastrService,public route:Router) { }
+
+  constructor(private formBuilder: FormBuilder, private service: RecipeService, private ingredientService: IngredientService,
+    private toastr:ToastrService,public route:Router, private categoryService: CategoryService) { }
   ngOnInit(): void {
 
     this.addRecipeForm = this.formBuilder.group({
-      'categoryId': new FormControl('',Validators.required),
-      'name': new FormControl('',Validators.required),
-      'userId': new FormControl('',Validators.required),
-      'price': new FormControl('',Validators.required),
-      'description': new FormControl('',Validators.required),
+      categoryId: new FormControl('',Validators.required),
+      name: new FormControl('',Validators.required),
+      userID: new FormControl('',Validators.required),
+      price: new FormControl('',Validators.required),
+      description: new FormControl('',Validators.required),
       ingredientsList: this.Ingredients
     })
 
@@ -48,15 +50,15 @@ export class AddrecipeComponent implements OnInit {
     this.Ingredients.push(model);
     console.log(this.Ingredients);
     this.ingredientForm.reset();
-    
+
   }
-  
+
   createRecipe() {
     this.addRecipeForm.value.ingredientsList = this.Ingredients;
     console.log(this.addRecipeForm.value);
     console.log("recipe added");
     this.service.addRecipe(this.addRecipeForm.value).subscribe(data => {
-      this.toastr.success("Recipe succesfully created");  
+      this.toastr.success("Recipe succesfully created");
     }), err => {
       this.toastr.error(err.error);
       console.log("Unable to create recipe");
@@ -69,13 +71,13 @@ export class AddrecipeComponent implements OnInit {
   }
 
    loadIngredients() {
-    this.service.getIngredients().subscribe
+    this.ingredientService.getIngredients().subscribe
       (response => {
         this.IngredientsForm = response;
       })
   }
   loadCategories() {
-    this.service.getRecipesCategories().subscribe
+    this.categoryService.getRecipesCategories().subscribe
       (response => {
         this.CategoryRecipesList = response;
       })

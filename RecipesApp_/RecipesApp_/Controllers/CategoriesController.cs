@@ -20,7 +20,7 @@ namespace RecipesApp.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        public async Task<IActionResult> GetCategories([FromQuery] PaginationParams paginationParams)
+        public async Task<IActionResult> GetCategories([FromQuery]PaginationParams paginationParams)
         {
             var categories = await _categories.GetCategoryAsync(paginationParams);
 
@@ -37,46 +37,28 @@ namespace RecipesApp.Controllers
         [HttpPost]
         public async Task<IActionResult> AddCategory(AddCategoryRequest addCategoryRequest)
         {
-            if (addCategoryRequest != null)
-            {
-                await _categories.AddCategoryAsync(addCategoryRequest);
-                return Ok("You successed");
-            }
-            else
-            {
-                return NotFound();
-            }
+             await _categories.AddCategoryAsync(addCategoryRequest);
+             return Ok("You succeeded");
         }
+
         [HttpPut]
         public async Task<IActionResult> UpdateCategory(UpdateCategoryRequest updateCategoryRequest)
         {
-            if (updateCategoryRequest.Id != 0)
-            {
-                await _categories.UpdateCategoryAsync(updateCategoryRequest);
-                return Ok("You successed");
-            }
-            else
-            {
-                return NotFound();
-            }
+            await _categories.UpdateCategoryAsync(updateCategoryRequest);
+            return Ok("You succeeded");
         }
+
         [HttpDelete("{categoryId}")]
         public async Task<IActionResult> DeleteCategory(int categoryId)
         {
-            if (categoryId != 0)
-            {
-                await _categories.DeleteCategoryAsync(categoryId);
-                return Ok("You successed");
-            }
-            else
-            {
-                return NotFound();
-            }
+             await _categories.DeleteCategoryAsync(categoryId);
+             return Ok("You succeeded");
         }
+
         [HttpGet("{categoryId}")]
         public async Task<IActionResult> GetCurrentCategoryData(int categoryId)
         {
-           return Ok(await _categories.GetCurrentDataAsync(categoryId));
+           return Ok(await _categories.GetByIdAsync(categoryId));
         }
     }
 }

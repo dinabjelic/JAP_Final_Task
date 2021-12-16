@@ -46,10 +46,10 @@ namespace RecipesApp.Interfaces
         /// <returns></returns>
         Task UpdateRecipesDetailsAsync(UpdateRecipeDetailsRequest updateRecipeDetailsRequest);
         /// <summary>
-        ///  Gets current recipe data search by id
+        ///  Gets current recipe data requested by id
         /// </summary>
         /// <param name="recipeId"></param>
         /// <returns></returns>
-        Task<List<Recipe>> GetCurrentDataAsync(int recipeId);
+        Task<Recipe> GetByIdAsync(int recipeId);
     }
 }

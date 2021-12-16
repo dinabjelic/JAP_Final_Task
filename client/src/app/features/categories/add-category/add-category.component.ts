@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SharedService } from 'app/core/shared.service';
+import { CategoryService } from 'app/core/services/category.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,7 +13,7 @@ export class AddCategoryComponent implements OnInit {
 
   addCategoryForm:FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder,private service: SharedService,private toastr:ToastrService,public route:Router) { }
+  constructor(private formBuilder: FormBuilder,public service: CategoryService,private toastr:ToastrService,public route:Router) { }
 
   ngOnInit(): void {
     this.addCategoryForm = this.formBuilder.group({

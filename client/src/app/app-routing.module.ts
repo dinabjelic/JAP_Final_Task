@@ -21,16 +21,23 @@ const routes: Routes = [
 {path:'categories',component:RecipesComponent,},
 {path:'categories/:id', component:RecipesForCategoryComponent},
 {path:'categories/:id/:recipeid', component:RecipeDetailsComponent},
-{path:'addnewrecipe', component:AddrecipeComponent, canActivate:[AuthGuardGuard]},
-{path:'login', component:LoginformComponent},
-{path:'addcategory', component:AddCategoryComponent,canActivate:[AuthGuardGuard]},
-{path:'updatecategory/:id',component:UpdateCategoryComponent,canActivate:[AuthGuardGuard]},
-{path:'updaterecipe/:id', component:UpdateRecipeComponent,canActivate:[AuthGuardGuard]},
-{path:'ingredients', component:IngredientDetailsComponent,canActivate:[AuthGuardGuard]},
-{path:'ingredients/addingredient',component:AddIngredientComponent,canActivate:[AuthGuardGuard]}, 
-{path:'ingredients/:id', component:UpdateIngredientComponent,canActivate:[AuthGuardGuard]}, 
-{path:'categories/:ingredientsId/updaterecipedetails', component:UpdateRecipeDetailsComponent,canActivate:[AuthGuardGuard]},
-{path:'auth',component:LoginformComponent}
+{path:'auth',component:LoginformComponent},
+{
+  path: '',
+    runGuardsAndResolvers:'always',
+    canActivate: [AuthGuardGuard],
+    children:[
+      
+      {path:'addnewrecipe', component:AddrecipeComponent},
+      {path:'addcategory', component:AddCategoryComponent},
+      {path:'updatecategory/:id',component:UpdateCategoryComponent},
+      {path:'updaterecipe/:id', component:UpdateRecipeComponent},
+      {path:'ingredients', component:IngredientDetailsComponent},
+      {path:'ingredients/addingredient',component:AddIngredientComponent}, 
+      {path:'ingredients/:id', component:UpdateIngredientComponent}, 
+      {path:'categories/:ingredientsId/updaterecipedetails', component:UpdateRecipeDetailsComponent},
+    ]
+}
 
 ];
 

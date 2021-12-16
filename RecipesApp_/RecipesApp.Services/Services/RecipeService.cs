@@ -21,6 +21,7 @@ namespace RecipesApp.Services
         private readonly IIngredientService _ingredientService;
         private readonly ICategoryService _categoryService;
         private readonly IMapper _mapper;
+
         public RecipeService(RecipesDbContext context, IMapper mapper,
             IIngredientRecipeCostService ingredientRecipeCostService,
             IIngredientService ingredientService,
@@ -52,10 +53,14 @@ namespace RecipesApp.Services
                     })
                .ToListAsync();
 
+            if (list == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
 
             if (!string.IsNullOrEmpty(searchTerm))
             {
-                list = list.Where(x => x.Name.ToLower().Contains(searchTerm)).ToList();
+                list = list.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
             }
 
             return list;
@@ -70,8 +75,12 @@ namespace RecipesApp.Services
                 .OrderBy(x => x.Price)
                 .FirstOrDefaultAsync();
 
-           var recipeDetails= _mapper.Map<GetRecipeDetailsResponse>(recipe);
+            if (recipe == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
 
+            var recipeDetails= _mapper.Map<GetRecipeDetailsResponse>(recipe);
             _ingredientRecipeCostService.IngredientRecipeCost(recipeDetails);
 
             return recipeDetails;
@@ -79,17 +88,32 @@ namespace RecipesApp.Services
 
         public async Task UpdateRecipesDetailsAsync(UpdateRecipeDetailsRequest updateRecipeDetailsRequest)
         {
+            if (updateRecipeDetailsRequest == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
+
             var ingredientRecipeDetails =
                 _context.IngredientsRecepies.FirstOrDefault(x => x.RecipesId == updateRecipeDetailsRequest.RecipesId && x.IngredientsId == updateRecipeDetailsRequest.IngredientsId);
-            
-            _mapper.Map(updateRecipeDetailsRequest, ingredientRecipeDetails);
 
+            if (ingredientRecipeDetails == null)
+            {
+                throw new ArgumentException("Invalid ingredientId");
+            }
+
+            _mapper.Map(updateRecipeDetailsRequest, ingredientRecipeDetails);
+            _context.IngredientsRecepies.Update(ingredientRecipeDetails);
             await _context.SaveChangesAsync();
         }
 
 
         public async Task AddRecipeAsync(AddRecipeRequest recipesModel)
         {
+            if (recipesModel == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
+
             if (recipesModel.IngredientsList.Count == 0)
             {
                 throw new ArgumentException("Ingredient list is empty");
@@ -137,13 +161,20 @@ namespace RecipesApp.Services
 
         public async Task UpdateRecipeAsync(UpdateRecipeRequest updateRecipeRequest)
         {
+            if (updateRecipeRequest == null)
+            {
+                throw new ArgumentException("Invalid request");
+            }
+
             var recipe =await _context.Recipes.FirstOrDefaultAsync(x=>x.Id==updateRecipeRequest.Id);
+
             if (recipe == null)
             {
                 throw new ArgumentException("Invalid recipeId");
             }
-            _mapper.Map(updateRecipeRequest, recipe);
 
+            _mapper.Map(updateRecipeRequest, recipe);
+            _context.Recipes.Update(recipe);
             await _context.SaveChangesAsync();
         }
         public async Task DeleteRecipeAsync(int recipeId)
@@ -157,10 +188,13 @@ namespace RecipesApp.Services
             await _context.SaveChangesAsync();
         }
 
-        public async Task<List<Recipe>> GetCurrentDataAsync(int recipeId)
+        public async Task<Recipe> GetByIdAsync(int recipeId)
         {
-            var currentData = await _context.Recipes.Where(x => x.Id == recipeId).ToListAsync();
-
+            var currentData = await _context.Recipes.FirstOrDefaultAsync(x => x.Id == recipeId);
+            if (currentData == null)
+            {
+                throw new ArgumentException("Invalid categoryId");
+            }
             return currentData;
         }
     }

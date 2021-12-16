@@ -12,12 +12,6 @@
 </div>
 
 
-<!-- <nav class="navbar">
-    <input class="form-control" type="text" name="ingredientName" [(ngModel)]="ingredientName" 
-    (ngModelChange)="Search()" placeholder="Enter ingredient name to search">
-</nav>  -->
-
-
 <table class="table table-striped table-hover" >
 
     <thead>
@@ -37,10 +31,6 @@
             <td>{{dataItem.ingredients.quantity}}</td>
             <td>{{dataItem.ingredients.measure}}</td>
             <td>{{dataItem.ingredientPrice}}</td>
-            <!-- <td>
-                <button routerLink="categories/{{dataItem.ingredients.id}}/updaterecipedetails"
-                type="button" class="btn btn-light mr-1" Button>Update details</button>
-            </td> -->
         </tr>
     </tbody>
 </table>

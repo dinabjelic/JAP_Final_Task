@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { SharedService } from 'app/core/shared.service';
+import { IngredientService } from 'app/core/services/ingredient.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
@@ -13,7 +13,7 @@ export class AddIngredientComponent implements OnInit {
 
   addIngredientForm:FormGroup = new FormGroup({});
 
-  constructor(private formBuilder: FormBuilder,private service: SharedService,private toastr:ToastrService,public route:Router) { }
+  constructor(private formBuilder: FormBuilder,private service: IngredientService,private toastr:ToastrService,public route:Router) { }
 
   ngOnInit(): void {
     this.addIngredientForm = this.formBuilder.group({
