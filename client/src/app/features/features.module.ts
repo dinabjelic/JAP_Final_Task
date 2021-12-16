@@ -26,6 +26,8 @@ import { RecipeService } from 'app/core/services/recipe.service';
 import { CategoryService } from 'app/core/services/category.service';
 import { IngredientService } from 'app/core/services/ingredient.service';
 
+
+
 @NgModule({
   declarations: [
     RecipesComponent,
@@ -58,7 +60,7 @@ import { IngredientService } from 'app/core/services/ingredient.service';
     AutheticationService,
     RecipeService,
     CategoryService,
-    IngredientService
+    IngredientService,
   ],
   
 })

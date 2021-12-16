@@ -13,11 +13,11 @@ import { UpdateCategoryRequest } from "../requests/UpdateCategoryRequest";
 })
 export class CategoryService {
 
-    public isAuthenticated = false;
     paginatedResult: PaginatedResult<RecipesCategory[]> = new PaginatedResult<RecipesCategory[]>();
 
 
-    constructor(private http: HttpClient, public router: Router) { }
+    constructor(private http: HttpClient, public router: Router) {
+     }
 
     getCategories(page?: number, itemsPerPage?: number) {
         let params = new HttpParams();

@@ -33,10 +33,10 @@
                 type="button" class="btn btn-light mr-1" Button >See recipe details</button>
             </td>
             <td>
-                <button *ngIf="!service.isAuthenticated" routerLink="/updaterecipe/{{dataItem.recipeId}}"
+                <button *ngIf="authService.isAuthenticated" routerLink="/updaterecipe/{{dataItem.recipeId}}"
                 type="button" class="btn btn-light mr-1" Button >Update recipe</button>
             </td>
-            <td *ngIf="!service.isAuthenticated"><i (click)="deleteRecipe(dataItem.recipeId)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
+            <td *ngIf="authService.isAuthenticated"><i (click)="deleteRecipe(dataItem.recipeId)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
 
             <!-- <td>
                 <button *ngIf="service.isAuthenticated" (click)="deleteRecipe(dataItem.recipeId)"

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { IngredientSearch } from 'app/core/dtos/IngredientSearch';
 import { PaginatedResult, Pagination } from 'app/core/helpers/Pagination';
 import { GetIngredientsResponse } from 'app/core/responses/GetIngredientsResponse';
+import { AutheticationService } from 'app/core/services/authetication.service';
 import { IngredientService } from 'app/core/services/ingredient.service';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 import { ToastrService } from 'ngx-toastr';
@@ -25,7 +26,7 @@ export class IngredientDetailsComponent implements OnInit {
 
 
   constructor(public service: IngredientService,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
-    private toastr:ToastrService,public route:Router) {
+    private toastr:ToastrService,public route:Router, public authService: AutheticationService) {
   }
 
   ngOnInit(): void {
@@ -63,8 +64,8 @@ export class IngredientDetailsComponent implements OnInit {
         setTimeout(() => {
           location.reload();
         }, 1000);
+        this.toastr.success("Ingredient succesfully deleted");
       } 
-      this.toastr.success("Ingredient succesfully deleted");
     }), err => {
       this.toastr.error(err.error);
       console.log("Unable to delete ingredient");

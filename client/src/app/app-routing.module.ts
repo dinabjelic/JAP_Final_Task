@@ -38,7 +38,6 @@ const routes: Routes = [
       {path:'categories/:ingredientsId/updaterecipedetails', component:UpdateRecipeDetailsComponent},
     ]
 }
-
 ];
 
 @NgModule({

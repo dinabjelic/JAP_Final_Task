@@ -4,6 +4,7 @@ import { Pagination } from '../../../core/helpers/Pagination';
 import { ToastrService } from 'ngx-toastr';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 import { CategoryService } from 'app/core/services/category.service';
+import { AutheticationService } from 'app/core/services/authetication.service';
 
 @Component({
   selector: 'app-category-recipes',
@@ -16,7 +17,11 @@ export class CategoryRecipesComponent implements OnInit {
   pagination: Pagination;
   pageNumber = 1;
   pageSize = 10;
-  constructor(public service: CategoryService, public toastr: ToastrService, private ngxBootstrapConfirmService: NgxBootstrapConfirmService) { }
+
+  constructor(public service: CategoryService, public toastr: ToastrService, 
+    private ngxBootstrapConfirmService: NgxBootstrapConfirmService,public authService: AutheticationService) { 
+
+  }
 
   ngOnInit(): void {
     this.loadCategories();
@@ -49,8 +54,8 @@ export class CategoryRecipesComponent implements OnInit {
         setTimeout(() => {
           location.reload();
         }, 1000);
+        this.toastr.success("Category succesfully deleted");
       }
-      this.toastr.success("Category succesfully deleted");
     }), err => {
       this.toastr.error(err.error);
       console.log("Unable to delete category");

@@ -1,6 +1,7 @@
 import { SelectorMatcher } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { AutheticationService } from 'app/core/services/authetication.service';
 import { RecipeService } from 'app/core/services/recipe.service';
 import { NgxBootstrapConfirmService } from 'ngx-bootstrap-confirm';
 import { ToastrService } from 'ngx-toastr';
@@ -19,8 +20,9 @@ export class RecipesForCategoryComponent implements OnInit {
   searchTerm:string="";
   recipeCategoryId:number;
  
-  constructor(public service:RecipeService, private route:ActivatedRoute,private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
-    private toastr:ToastrService) { }
+  constructor(public service:RecipeService, private route:ActivatedRoute,
+    private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
+    private toastr:ToastrService,public authService: AutheticationService) { }
 
 
   ngOnInit(): void {
@@ -49,8 +51,8 @@ export class RecipesForCategoryComponent implements OnInit {
           setTimeout(() => {
             location.reload();
           }, 1000);
+          this.toastr.success("Recipe succesfully deleted");
         } 
-        this.toastr.success("Recipe succesfully deleted");
       }), err => {
         this.toastr.error(err.error);
         console.log("Unable to delete recipe");

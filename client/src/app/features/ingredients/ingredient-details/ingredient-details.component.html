@@ -2,13 +2,13 @@
   <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.name" (input)="Search()"   placeholder="Enter ingredient name to search">
 
   <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.quantity" (input)="Search()" 
-  placeholder="Enter quantity name to search">
+  placeholder="Enter quantity to search">
   
   <input class="form-control" type="text" name="searchTerm" [(ngModel)]="searchTerm.measure" (input)="Search()" 
   placeholder="kg gr ml l">
 </nav>
 
-<button type="submit" *ngIf="service.isAuthenticated" class="btn btn-success" routerLink="addingredient"style="cursor: pointer; margin-left: 80%">Add ingredient</button>
+<button type="submit" *ngIf="!service.isAuthenticated" class="btn btn-success" routerLink="addingredient"style="cursor: pointer; margin-left: 80%">Add ingredient</button>
 
 
 
@@ -31,10 +31,10 @@
       <td>{{dataItem.quantity}}</td>
       <td>{{dataItem.measure}}</td>
       <td>
-        <button *ngIf="!service.isAuthenticated" routerLink="/ingredients/{{dataItem.id}}" type="button"
+        <button *ngIf="authService.isAuthenticated" routerLink="/ingredients/{{dataItem.id}}" type="button"
           class="btn btn-light mr-1" Button>Update ingredient</button>
       </td>
-      <td *ngIf="!service.isAuthenticated"><i (click)="deleteIngredient(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
+      <td *ngIf="authService.isAuthenticated"><i (click)="deleteIngredient(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
       
     </tr>
 

@@ -16,9 +16,9 @@ export class AutheticationService {
   private currentUserSource = new ReplaySubject<User>(1);
   currentUser$ = this.currentUserSource.asObservable();
   public isAuthenticated = false;
-  readonly ApiUrl = "https://localhost:5001/api/";
 
   constructor(private http: HttpClient, public router: Router) {
+
     this.isAuthenticated = localStorage.getItem('token') != null
       && localStorage.getItem('token') != undefined && localStorage.getItem('token') != "";
   }
