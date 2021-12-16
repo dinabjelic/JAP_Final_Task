@@ -13,9 +13,8 @@ import { GetIngredientsResponse } from "../responses/GetIngredientsResponse";
     providedIn: 'root'
 })
 export class IngredientService {
-    public isAuthenticated = false;
-    paginatedResult2: PaginatedResult<GetIngredientsResponse[]> = new PaginatedResult<GetIngredientsResponse[]>();
 
+    paginatedResult2: PaginatedResult<GetIngredientsResponse[]> = new PaginatedResult<GetIngredientsResponse[]>();
 
     constructor(private http: HttpClient, public router: Router) { }
 

@@ -8,7 +8,7 @@
   placeholder="kg gr ml l">
 </nav>
 
-<button type="submit" *ngIf="!service.isAuthenticated" class="btn btn-success" routerLink="addingredient"style="cursor: pointer; margin-left: 80%">Add ingredient</button>
+<button type="submit" *ngIf="authService.isAuthenticated" class="btn btn-success" routerLink="addingredient"style="cursor: pointer; margin-left: 80%">Add ingredient</button>
 
 
 

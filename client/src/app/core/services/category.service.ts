@@ -15,7 +15,6 @@ export class CategoryService {
 
     paginatedResult: PaginatedResult<RecipesCategory[]> = new PaginatedResult<RecipesCategory[]>();
 
-
     constructor(private http: HttpClient, public router: Router) {
      }
 

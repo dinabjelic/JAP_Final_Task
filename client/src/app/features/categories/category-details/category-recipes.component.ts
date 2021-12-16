@@ -18,8 +18,8 @@ export class CategoryRecipesComponent implements OnInit {
   pageNumber = 1;
   pageSize = 10;
 
-  constructor(public service: CategoryService, public toastr: ToastrService, 
-    private ngxBootstrapConfirmService: NgxBootstrapConfirmService,public authService: AutheticationService) { 
+  constructor(public service: CategoryService, public toastr: ToastrService,
+    private ngxBootstrapConfirmService: NgxBootstrapConfirmService, public authService: AutheticationService) {
 
   }
 

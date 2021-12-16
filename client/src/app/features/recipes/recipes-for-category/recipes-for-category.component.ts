@@ -14,54 +14,53 @@ import { RecipesCategories } from '../../../core/models/RecipesCategories';
 })
 export class RecipesForCategoryComponent implements OnInit {
 
-  CategoryRecipesList: RecipesCategories[]=[];
-  categoryrecipes : RecipesCategories;
+  CategoryRecipesList: RecipesCategories[] = [];
+  categoryrecipes: RecipesCategories;
   recipeName: any;
-  searchTerm:string="";
-  recipeCategoryId:number;
- 
-  constructor(public service:RecipeService, private route:ActivatedRoute,
+  searchTerm: string = "";
+  recipeCategoryId: number;
+
+  constructor(public service: RecipeService, private route: ActivatedRoute,
     private ngxBootstrapConfirmService: NgxBootstrapConfirmService,
-    private toastr:ToastrService,public authService: AutheticationService) { }
+    private toastr: ToastrService, public authService: AutheticationService) { }
 
 
   ngOnInit(): void {
-  
-    this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
+
+    this.loadRecipeCategory(this.route.snapshot.params.id, this.searchTerm);
   }
 
-    loadRecipeCategory(id:number,searchTerm:string){
-      this.service.getAllCategoryRecipes(this.route.snapshot.params.id,this.searchTerm).subscribe(
-        response=>{
-          this.CategoryRecipesList= response; 
-        });
-    }
-    
-    deleteRecipe(item){
-      let options ={
-        title: 'Sure you want to delete this ingredient?',
-        confirmLabel: 'Yes',
-        declineLabel: 'Cancel'
-      }
-      this.ngxBootstrapConfirmService.confirm(options).then((res: boolean) => {
-        if (res) {
-          this.service.deleteRecipe(item).subscribe(data=>{
-            this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
-          })
-          setTimeout(() => {
-            location.reload();
-          }, 1000);
-          this.toastr.success("Recipe succesfully deleted");
-        } 
-      }), err => {
-        this.toastr.error(err.error);
-        console.log("Unable to delete recipe");
-      }
-    }
+  loadRecipeCategory(id: number, searchTerm: string) {
+    this.service.getAllCategoryRecipes(this.route.snapshot.params.id, this.searchTerm).subscribe(
+      response => {
+        this.CategoryRecipesList = response;
+      });
+  }
 
-    Search()
-    {
-        this.loadRecipeCategory(this.route.snapshot.params.id,this.searchTerm);
+  deleteRecipe(item) {
+    let options = {
+      title: 'Sure you want to delete this ingredient?',
+      confirmLabel: 'Yes',
+      declineLabel: 'Cancel'
     }
+    this.ngxBootstrapConfirmService.confirm(options).then((res: boolean) => {
+      if (res) {
+        this.service.deleteRecipe(item).subscribe(data => {
+          this.loadRecipeCategory(this.route.snapshot.params.id, this.searchTerm);
+        })
+        setTimeout(() => {
+          location.reload();
+        }, 1000);
+        this.toastr.success("Recipe succesfully deleted");
+      }
+    }), err => {
+      this.toastr.error(err.error);
+      console.log("Unable to delete recipe");
+    }
+  }
+
+  Search() {
+    this.loadRecipeCategory(this.route.snapshot.params.id, this.searchTerm);
+  }
 }
-    
+

@@ -10,13 +10,15 @@
       <tr *ngFor="let dataItem of CategoryRecipesList">
         <td>{{dataItem.name}}</td>
         <td>
-          <button routerLink="/categories/{{dataItem.id}}" type="button" class="btn btn-light mr-1" Button>See details</button>
+          <button routerLink="/categories/{{dataItem.id}}" type="button" class="btn btn-light mr-1" Button>See
+            details</button>
         </td>
         <td>
           <button *ngIf="authService.isAuthenticated" routerLink="/updatecategory/{{dataItem.id}}" type="button"
-          class="btn btn-light mr-1" Button>Update category</button>
+            class="btn btn-light mr-1" Button>Update category</button>
         </td>
-        <td *ngIf="authService.isAuthenticated"><i (click)="deleteCategory(dataItem.id)" class="fa fa-trash" style="color: red;font-size: 20px;"></i></td>
+        <td *ngIf="authService.isAuthenticated"><i (click)="deleteCategory(dataItem.id)" class="fa fa-trash"
+            style="color: red;font-size: 20px;"></i></td>
       </tr>
     </tbody>
   </table>
@@ -35,5 +37,3 @@
   lastText="&raquo;">
   </pagination>
 </div>
-
-

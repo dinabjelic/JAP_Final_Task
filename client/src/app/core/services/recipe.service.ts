@@ -10,7 +10,6 @@ import { UpdateRecipeRequest } from "../requests/UpdateRecipeRequest";
     providedIn: 'root'
 })
 export class RecipeService {
-    public isAuthenticated = false;
 
     constructor(private http: HttpClient, public router: Router) { }
 
