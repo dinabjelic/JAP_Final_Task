@@ -23,7 +23,7 @@ const routes: Routes = [
 {path:'categories/:id/:recipeid', component:RecipeDetailsComponent},
 {path:'auth',component:LoginformComponent},
 {
-  path: '',
+    path: '',
     runGuardsAndResolvers:'always',
     canActivate: [AuthGuardGuard],
     children:[
