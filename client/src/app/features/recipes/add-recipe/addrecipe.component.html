@@ -15,11 +15,11 @@
 
           <div class="form-group">
 
-            <label> Choose category to add recipe</label>
+            <label> Choose category for recipe</label>
 
-            <select class="form-conrol custom-dropdown" formControlName="categoryId" type="number">
+            <select class="form-conrol custom-dropdown" formControlName="categoryId" >
           
-                <option type="number" *ngFor="let dl of CategoryRecipesList" [value]="dl.categoryId">{{dl.categoryName}}</option>
+                <option  *ngFor="let dl of CategoryRecipesList" [ngValue]="dl.categoryId">{{dl.categoryName}}</option>
           
             </select>
           
@@ -52,9 +52,9 @@
 
                         <label> Choose ingredient for the recipe</label>
 
-                        <select class="form-conrol custom-dropdown" formControlName="id" type="number">
+                        <select class="form-conrol custom-dropdown" formControlName="id" >
 
-                          <option type="number" *ngFor="let dl of IngredientsForm" [value]="dl.id">{{dl.name}}</option>
+                          <option *ngFor="let dl of IngredientsForm"  [ngValue]="dl.id">{{dl.name}}</option>
 
                         </select>
                       

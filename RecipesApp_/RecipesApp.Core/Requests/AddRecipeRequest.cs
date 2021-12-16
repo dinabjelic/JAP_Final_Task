@@ -17,9 +17,7 @@ namespace RecipesApp.Models
         public double Price { get; set; }
         [Required]
         public string Description { get; set; }
-        [Required]
         public string IngredientName { get; set; }
-        [Required]
         public string CategoryName { get; set; }
         [Required]
         public int CategoryId { get; set; }
