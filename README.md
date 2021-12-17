@@ -1,4 +1,5 @@
 RecipeApp 
+
 STARTING THE APPLICATION 
 
 -You need to do some things listed below so you can start application 
@@ -10,21 +11,23 @@ RecipesApp.LoggerDatabase and type update-database -context RecipesLoggerDbConte
 
 -After you finished updateing you will have to add user manually so you can login.
 First, start the project with (F5, ctrl F5). This project is API and on the startup, it will be Swagger where you need to authorized 
-for some endpoints. You will have to generate hashed password by starting this endpoint 'https://localhost:5001/api/Authentication' and after that you will be able 
+for some endpoints. You will have to generate hashed password by starting this endpoint https://localhost:5001/api/Authentication and after that you will be able 
 to add test data in tables 'User' and 'AspNetUsers', including hashed password. 
 
 -If you want to run the frontend part of the application, open client folder in Visual Studio Code and after that open the Terminal(make sure you are in the client folder.
 You can use command 'cd client' to enter folder) and type
 
-NPM INSTALL 
+npm install
 
 With this command you are making sure that all dependencies are being installed.
 
-After that, use 
-NG SERVE
+After that, use
 
-This command is launching the application on the browser. In the browser type 'http://localhost:4200/' and the application will be started.
+ng serve
+
+This command is launching the application on the browser. In the browser type http://localhost:4200/ and the application will be started.
 To be able to see the required data you need to run both the backend and frontend part of the application at once.
+
 
 About application
 
