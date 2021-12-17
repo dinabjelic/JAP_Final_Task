@@ -21,7 +21,7 @@ npm install
 
 With this command you are making sure that all dependencies are being installed.
 
-After that, use
+After that, type command 
 
 ng serve
 
