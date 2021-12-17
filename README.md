@@ -23,7 +23,7 @@ With this command you are making sure that all dependencies are being installed.
 
 After that, type command 
 
-**_ng serve_**
+![Capture](https://user-images.githubusercontent.com/75682425/146528547-8e51bdb2-2f50-4b00-a1e0-67def557e5ee.PNG)
 
 This command is launching the application on the browser. In the browser type http://localhost:4200/ and the application will be started.
 To be able to see the required data you need to run both the backend and frontend part of the application at once.
