@@ -26,7 +26,9 @@ After that, type command
 
 ![Capture](https://user-images.githubusercontent.com/75682425/146529547-44cbfe61-9c45-46c9-814a-fb5060037cd1.PNG)
 
-This command is launching the application on the browser. In the browser type http://localhost:4200/ and the application will be started.
+This command is launching the application on the browser. 
+
+In the browser type http://localhost:4200/ and the application will be started.
 To be able to see the required data you need to run both the backend and frontend part of the application at once.
 
 
