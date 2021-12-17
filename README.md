@@ -1,6 +1,6 @@
-RecipeApp 
+# RecipeApp 
 
-STARTING THE APPLICATION 
+## Starting the application 
 
 -You need to do some things listed below so you can start application 
 
@@ -29,7 +29,7 @@ This command is launching the application on the browser. In the browser type ht
 To be able to see the required data you need to run both the backend and frontend part of the application at once.
 
 
-ABOUT APPLICATION
+## About application
 
 -This application allows you to enter and view recipes and various categories of dishes. For building this app is used the RESTful API C# .NET CORE for backend, 
 Microsoft SQL Server Managment Studio for database and Angular for frontend. First thing that appears are categories which allows you to continue to other routes by 
