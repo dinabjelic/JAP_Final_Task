@@ -17,7 +17,7 @@ to add test data in tables 'User' and 'AspNetUsers', including hashed password.
 -If you want to run the frontend part of the application, open client folder in Visual Studio Code and after that open the Terminal(make sure you are in the client folder.
 You can use command 'cd client' to enter folder) and type 
 
- ![Capture](https://user-images.githubusercontent.com/75682425/146528877-dc65ed9c-db5f-40a3-be88-e266c0f778c9.PNG)
+ ![Capture](https://user-images.githubusercontent.com/75682425/146529369-b97794cb-b5a3-4287-addc-a2893ba7e59f.PNG)
 
 With this command you are making sure that all dependencies are being installed.
 
