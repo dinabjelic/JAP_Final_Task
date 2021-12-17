@@ -15,15 +15,15 @@ for some endpoints. You will have to generate hashed password by starting this e
 to add test data in tables 'User' and 'AspNetUsers', including hashed password. 
 
 -If you want to run the frontend part of the application, open client folder in Visual Studio Code and after that open the Terminal(make sure you are in the client folder.
-You can use command 'cd client' to enter folder) and type
+You can use command 'cd client' to enter folder) and type 
 
-npm install
+**_npm install_**
 
 With this command you are making sure that all dependencies are being installed.
 
 After that, type command 
 
-ng serve
+**_ng serve_**
 
 This command is launching the application on the browser. In the browser type http://localhost:4200/ and the application will be started.
 To be able to see the required data you need to run both the backend and frontend part of the application at once.
