@@ -4,10 +4,11 @@
 
 -You need to do some things listed below so you can start application 
 
--The first step you need to do is clone the githab repository. After you cloned the project do the rebuild of the whole solution in Visual studio. 
-After that you need to do an update database to create all the necessary tables. To do that open .sln and in Package Manager Console choose as Default project 
-RecipesApp.Database and type update-database -context RecipesDbContext. If you want to add logging, in Package Manager Console as Default project choose 
-RecipesApp.LoggerDatabase and type update-database -context RecipesLoggerDbContext. 
+-The first step you need to do is clone the githab repository. After you cloned the project do the rebuild of 
+the whole solution in Visual studio. After that you need to do an update database to create all the necessary
+tables. To do that open .sln and in Package Manager Console choose as Default project RecipesApp.Database and
+type update-database -context RecipesDbContext. If you want to add logging, in Package Manager Console as 
+Default project choose RecipesApp.LoggerDatabase and type update-database -context RecipesLoggerDbContext. 
 
 -After you finished updateing you will have to add user manually so you can login.
 First, start the project with (F5, ctrl F5). This project is API and on the startup, it will be Swagger where you need to authorized 
@@ -23,7 +24,7 @@ With this command you are making sure that all dependencies are being installed.
 
 After that, type command 
 
-![Capture](https://user-images.githubusercontent.com/75682425/146528547-8e51bdb2-2f50-4b00-a1e0-67def557e5ee.PNG)
+![Capture](https://user-images.githubusercontent.com/75682425/146529547-44cbfe61-9c45-46c9-814a-fb5060037cd1.PNG)
 
 This command is launching the application on the browser. In the browser type http://localhost:4200/ and the application will be started.
 To be able to see the required data you need to run both the backend and frontend part of the application at once.
