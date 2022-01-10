@@ -22,19 +22,6 @@ namespace RecipesApp_
             CreateHostBuilder(args).Build().Run();
         }
 
-        //private static void CreateHost(string[] args)
-        //{
-        //    try
-        //    {
-        //        CreateHostBuilder(args).Build().Run();
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        Log.Fatal($"Failed to start {Assembly.GetExecutingAssembly().GetName().Name}", ex);
-        //        throw;
-        //    }
-        //}
-
         public static IHostBuilder CreateHostBuilder(string[] args) =>
          Host.CreateDefaultBuilder(args)
         .ConfigureWebHostDefaults(webBuilder =>
@@ -49,29 +36,7 @@ namespace RecipesApp_
                 optional: true);
         })
         .UseSerilog();
-        //public static IHostBuilder CreateHostBuilder(string[] args)
-        //{
-        //    var configSettings = new ConfigurationBuilder()
-        //                             .AddJsonFile("appsettings.Development.json")
-        //                             .Build();
-        //    Log.Logger = new LoggerConfiguration()
-        //           .ReadFrom.Configuration(configSettings)
-        //           .CreateLogger();
-        //    return Host.CreateDefaultBuilder(args)
-        //        .ConfigureAppConfiguration(config =>
-        //        {
-        //            config.AddConfiguration(configSettings);
-        //        })
-        //        .ConfigureLogging(logging =>
-        //        {
-        //            logging.AddSerilog();
-        //        })
-        //        .ConfigureWebHostDefaults(webBuilder =>
-        //        {
-        //            webBuilder.UseStartup<Startup>();
-        //        });
-        //}
-
+      
         private static void ConfigureLogging()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
