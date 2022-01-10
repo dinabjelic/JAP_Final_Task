@@ -28,7 +28,40 @@ services:
     networks:
       - recipes-dev
 
-  elasticsearch:
+ db:
+    container_name: sql
+    image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
+    restart: always
+    ports:
+      - 1433:1433
+    environment:
+      ACCEPT_EULA: Y
+      SA_PASSWORD: QWElkj132!
+      # MSSQL_PID: Developer
+    networks:
+      - recipes-dev
+
+#  angular:
+#     container_name: angular
+#     image: recipesclient
+#     build:
+#       context: C:\Users\DinaBjelic\source\repos\JAP_Final_Task\
+#       dockerfile: client/Dockerfile
+#       args:
+#         ANUGLAR_APP_SECRET: "ThisIsMySuperSecretKeyThatNoOneKnows"
+#         ANGULAR_APP_API_BASE_URL: "http://localhost:5000/api"
+#     volumes:
+#      - ./app-ui:/usr/src/app/app-ui
+#      - /usr/src/app/app-ui/node_modules
+#     ports:
+#       - 3001:3000
+#     environment:
+#       - CHOKIDAR_USEPOLLING=true
+#     networks:
+#       - recipes-dev
+#     #  stdin_open: true
+
+ elasticsearch:
    container_name: elasticsearch
    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
    ports:
@@ -59,101 +92,3 @@ volumes:
   db_volume:
   react-app:
   elasticsearch-data:
-
-
-# version: '3.8'
-
-# networks:
-#   recipes-dev:
-#     driver: bridge
-
-# services:
-#  api:
-#     container_name: api
-#     image: recipesapi
-#     build:
-#       context: C:\Users\DinaBjelic\source\repos\JAP_Final_Task\RecipesApp_
-#       dockerfile: RecipesApp_/Dockerfile
-#     depends_on:
-#       - db
-#     ports:
-#       - 5000:80
-#     environment:
-#        ElasticConfiguration: Uri=http://elasticsearch:9200"
-#        DefaultConnection: Server=db,1433;Database=recipeFinal;User=sa;Password=QWElkj132!;
-#        ASPNETCORE_ENVIRONMENT: Development
-#       #  ASPNETCORE_URLS: https://+:443;http://+:80
-#     volumes:
-#       - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-#       - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
-#     links:
-#       - db
-#     networks:
-#       - recipes-dev
-
-#  db:
-#     container_name: sql
-#     image: mcr.microsoft.com/mssql/server:2017-latest-ubuntu
-#     restart: always
-#     ports:
-#       - 1433:1433
-#     environment:
-#       ACCEPT_EULA: Y
-#       SA_PASSWORD: QWElkj132!
-#       # MSSQL_PID: Developer
-#     networks:
-#       - recipes-dev
-
-# #  angular:
-# #     container_name: angular
-# #     image: recipesclient
-# #     build:
-# #       context: C:\Users\DinaBjelic\source\repos\JAP_Final_Task\
-# #       dockerfile: client/Dockerfile
-# #       args:
-# #         ANUGLAR_APP_SECRET: "ThisIsMySuperSecretKeyThatNoOneKnows"
-# #         ANGULAR_APP_API_BASE_URL: "http://localhost:5000/api"
-# #     volumes:
-# #      - ./app-ui:/usr/src/app/app-ui
-# #      - /usr/src/app/app-ui/node_modules
-# #     ports:
-# #       - 3001:3000
-# #     environment:
-# #       - CHOKIDAR_USEPOLLING=true
-# #     networks:
-# #       - recipes-dev
-# #     #  stdin_open: true
-
-#  elasticsearch:
-#    container_name: elasticsearch
-#    image: docker.elastic.co/elasticsearch/elasticsearch:7.16.2
-#    ports:
-#     - 9200:9200
-#    volumes:
-#     - elasticsearch-data:/usr/share/elasticsearch/data
-#    environment:
-#     - xpack.monitoring.enabled=true
-#     - xpack.watcher.enabled=false
-#     - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-#     - discovery.type=single-node
-#    networks:
-#     - recipes-dev
-
-#  kibana:
-#    container_name: kibana
-#    image: docker.elastic.co/kibana/kibana:7.16.2
-#    ports:
-#     - 5601:5601
-#    depends_on:
-#     - elasticsearch
-#    environment:
-#     - ELASTICSEARCH_URL=http://localhost:9200
-#    networks:
-#     - recipes-dev
-  
-# volumes:
-#   db_volume:
-#   react-app:
-#   elasticsearch-data:
-
-
