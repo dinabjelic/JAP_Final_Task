@@ -61,6 +61,8 @@ namespace RecipesApp_
             {
                 endpoints.MapControllers();
             });
+
+            app.MigrationInitialisation();
         }
     }
 }

@@ -1,0 +1,11 @@
+version: '3.4'
+
+services:
+
+  recipesapp.api:
+    image: ${DOCKER_REGISTRY-}recipesappapi
+    build:
+      context: .
+      dockerfile: RecipesApp_/Dockerfile
+
+

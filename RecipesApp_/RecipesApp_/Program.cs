@@ -20,6 +20,7 @@ namespace RecipesApp_
         {
             ConfigureLogging();
             CreateHostBuilder(args).Build().Run();
+
         }
 
         //private static void CreateHost(string[] args)
