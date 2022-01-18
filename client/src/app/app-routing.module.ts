@@ -18,6 +18,12 @@ import { AuthGuardGuard } from './core/guards/auth-guard';
 
 const routes: Routes = [
 
+// {
+//   path: 'categories', 
+//   loadChildren: () => import('./features/features.module').then(m=>m.FeaturesModule)
+// },
+
+
 {path:'categories',component:RecipesComponent,},
 {path:'categories/:id', component:RecipesForCategoryComponent},
 {path:'categories/:id/:recipeid', component:RecipeDetailsComponent},
