@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RecipesApp.Core.Models;
 using RecipesApp.Core.Requests;
+using RecipesApp.Core.Responses;
 using RecipesApp.Database.Entities;
 using RecipesApp.Models;
 
@@ -32,6 +33,8 @@ namespace RecipesApp.Mapper
             CreateMap<Ingredient, AddIngredientRequest>().ReverseMap();
 
             CreateMap<IngredientRecipe, UpdateRecipeDetailsRequest>().ReverseMap();
+            CreateMap<Recipe, GetRecipesResponse>().ReverseMap();
+
         }
     }
 }

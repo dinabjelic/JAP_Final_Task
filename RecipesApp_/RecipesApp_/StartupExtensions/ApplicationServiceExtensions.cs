@@ -20,6 +20,7 @@ namespace RecipesApp.StartupExtensions
             services.AddScoped<IIngredientService, IngredientService>();
             services.AddScoped<IGetRecipeService, RecipeProcedureService>();
             services.AddScoped<IIngredientRecipeCostService, IngredientRecipeCostService>();
+            services.AddScoped<IReportJobService, ReportJobService>();
 
 
             return services;
