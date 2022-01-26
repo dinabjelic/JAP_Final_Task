@@ -25,7 +25,6 @@ namespace RecipesApp.Services.Services
         {
             _context = context;
             _mapper = mapper;
-
         }
 
         public async Task  GetRecipesAsync()
@@ -36,7 +35,6 @@ namespace RecipesApp.Services.Services
             if (recipes == null)
             {
                 throw new ArgumentException("Invalid data");
-
             }
             var recipeDetails = _mapper.Map<List<GetRecipesResponse>>(recipes);
            
@@ -75,11 +73,11 @@ namespace RecipesApp.Services.Services
 
             foreach (var x in recipeDetails)
             {
-
                 htmlstring += "<tr><td style='border: 1px solid #dddddd;text-align: left;padding: 8px;'>" + x.Name + "</td>";
                 htmlstring += "<td style='border: 1px solid #dddddd;text-align: left;padding: 8px;'>" + x.Price + "</td>";
                 htmlstring += "<td style='border: 1px solid #dddddd;text-align: left;padding: 8px;'>" + x.Description + "</td></tr>";
             }
+
             htmlstring += "</tbody></table>";
 
             return htmlstring + reportDetails;
