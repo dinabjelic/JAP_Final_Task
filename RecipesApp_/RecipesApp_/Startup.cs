@@ -36,11 +36,13 @@ namespace RecipesApp_
             services.AddCors();
             services.AddAutoMapper(typeof(RecipesApp.Mapper.AutoMapper));
 
+
             services.AddHangfire(config => config
             .SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
             .UseSimpleAssemblyNameTypeSerializer()
             .UseDefaultTypeSerializer()
             .UseMemoryStorage());
+
 
             services.AddHangfireServer();
             services.AddControllers();
@@ -48,7 +50,7 @@ namespace RecipesApp_
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, 
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,
             IBackgroundJobClient backgroundJobClient, IRecurringJobManager recurringJobManager,
             IServiceProvider serviceProvider)
         {
@@ -74,14 +76,9 @@ namespace RecipesApp_
                 endpoints.MapControllers();
             });
 
-            app.UseHangfireDashboard();
-            backgroundJobClient.Enqueue(() => Console.WriteLine("Hello Hangfire job!"));
-            recurringJobManager.AddOrUpdate(
-                "Run every three hours",
-                () => serviceProvider.GetService<IReportJobService>().GetRecipesAsync(),
-                "0 0 */3 ? * *"
-                );
 
+            app.UseHangfireDashboard();
+            app.StartHangifire(backgroundJobClient, recurringJobManager, serviceProvider);
         }
     }
 }

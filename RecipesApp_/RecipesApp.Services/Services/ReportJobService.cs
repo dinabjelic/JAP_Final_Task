@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PdfSharpCore;
 using PdfSharpCore.Pdf;
@@ -12,7 +11,6 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using TheArtOfDev.HtmlRenderer.PdfSharp;
-using static System.Net.WebRequestMethods;
 
 namespace RecipesApp.Services.Services
 {
